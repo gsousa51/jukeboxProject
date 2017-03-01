@@ -1,0 +1,21 @@
+# 3/1/17 - Library
+#
+# Tasks for Jukebox Iteration 1
+
+[Gary]
+song
+songcollection
+account
+accountcollection
+jukebox
+
+
+[Steve] 
+GUI/view "song selector" 
+'card reader' 
+"GREAT DECIDER"  
+checking
+valid logins/users/valid minutes
+songqueue - data structure, run(), observer
+
+

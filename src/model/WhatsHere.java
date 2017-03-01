@@ -1,3 +1,7 @@
+/*
+ * Rick Mercer provided file
+ */
+
 package model;
 
 public class WhatsHere {

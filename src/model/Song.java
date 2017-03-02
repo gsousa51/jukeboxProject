@@ -5,12 +5,15 @@ public class Song {
 	private int length;
 	private String artistName;
 	private int timesPlayedToday;
+	private String fileName;
 	
-	public Song(String songName, String artistName, int length){
+	public Song(String artistName, String songName, String fileName, int length){
 		this.songName= songName;
 		this.artistName = artistName;
 		this.length = length;
+		this.setFileName(fileName);
 		timesPlayedToday = 0;
+		
 	}
 
 	public String getSongName() {
@@ -37,6 +40,14 @@ public class Song {
 	
 	public void newDay(){
 		timesPlayedToday=0;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 }

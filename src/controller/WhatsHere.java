@@ -1,3 +1,8 @@
+/*
+ * Rick Mercer provided file
+ */
+
+
 package controller;
 
 public class WhatsHere {

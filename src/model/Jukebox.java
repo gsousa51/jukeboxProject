@@ -27,7 +27,6 @@ public class Jukebox extends Observable {
 		LocalDate date = LocalDate.now();
 		day = date.getDayOfYear();
 		year = date.getYear();
-
 	}
 
 	private void addObservers() {
@@ -49,6 +48,7 @@ public class Jukebox extends Observable {
 			notifyObservers("DayChanged");
 		}
 	}
+	
 
 	public SongCollection getSongCollection() {
 		return songs;
@@ -86,7 +86,6 @@ public class Jukebox extends Observable {
 //		// if we get here, it passes all conditions.
 //		// we can play the song.
 //		return true;
-//
 //	}
 
 

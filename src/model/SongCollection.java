@@ -36,7 +36,12 @@ public class SongCollection implements Observer{
 		songList.add(new Song("Pierre Langer", "Untameable Fire", src+"UntameableFire.mp3",282));
 	}
 	
-
+//buttonclick
+	//validate
+	//checkifQueue empty
+	//update 
+	//playSong if it was empty
+	
 
 	//Parameter is the name of the song to return
 	//Return: Returns song that is requested or a null song.

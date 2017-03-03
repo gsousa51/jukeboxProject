@@ -30,6 +30,7 @@ public class AccountCollection implements Observer{
 		accountList.add(new Account("River", "333"));
 		accountList.add(new Account("Ryan","4444"));
 	}
+	
 
 	//Parameter: The name of the account we're searching for
 	//Return value: If we find an account with that name, returns the account
@@ -55,6 +56,10 @@ public class AccountCollection implements Observer{
 		return currentUser;
 	}
 
+	public void loggedOut(){
+		currentUser = null;
+	}
+	
 	@Override
 	//If the message is that there's a new day,
 	//Reset the songs played for every account.

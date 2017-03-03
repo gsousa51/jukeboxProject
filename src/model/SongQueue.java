@@ -8,7 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
 
-public class SongQueue implements Observer{
+public class SongQueue implements Observer {
 
 	SongCollection songCollection;
 	Queue<Song> songs;
@@ -19,6 +19,13 @@ public class SongQueue implements Observer{
 		
 	}//end constructor
 
+	public void addToQueue(Song songToAdd){
+		if(songs.isEmpty()){
+			startPlaying();
+		}
+		else  songs.add(songToAdd);
+	}
+	
 	@Override
 	public void update(Observable arg0, Object message) {
 		//Only have two update messages, if it isn't daychanged it's a song being chosen.

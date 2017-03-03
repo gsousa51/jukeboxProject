@@ -67,7 +67,7 @@ public class SongQueue implements Observer {
 			if(!songs.isEmpty()){
 				Song temp = songs.poll();
 				if(temp!=null){
-					SongPlayer.playFile(new SongWaiter(), songs.poll().getFileName());
+					SongPlayer.playFile(new SongWaiter(), temp.getFileName());
 				}
 				else songInProcess=false;
 			}

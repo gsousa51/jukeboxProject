@@ -21,18 +21,22 @@ public class SongCollection implements Observer{
 		buildList();
 	}
 	
-	//WORK ON THIS METHOD NEED TO CHANGE THE ADD PART TO MAKE NEW SONG
 	private void buildList(){
+		//Used to put in front of each filename parameter.
 		String src = "./songfiles";
+		//add all of the songs to the songlist
 		songList.add(new Song("Kevin MacLeod", "Danse Macabre", src+"DanseMacabreViolinHook.mp3",34));
 		songList.add(new Song("FreePlay Music", "Determined Tumbao",src+"DeterminedTumbao.mp3",20));
 		songList.add(new Song("Sun Microsystems", "Flute", src+"flute.aif",6));
-		songList.add(new Song("Unknown", "Space Music", src+"spacemusic.au",5));
-		songList.add(new Song("FreePlay Muisc", "", src+"",));
-		songList.add(new Song("", "", src+"",));	
-		songList.add(new Song("", "", src+"",));
-		songList.add(new Song("", "", src+"",));
+		songList.add(new Song("Kevin Macleod", "Loping Sting", src+"LopingSting.mp3",5));
+		songList.add(new Song("Unknown", "Space Music", src + "spacemusic.au",6));
+		songList.add(new Song("FreePlay Music", "Swing Cheese", src+"SwingCheese.mp3",15));
+		songList.add(new Song("Microsoft", "Tada", src+"tada.wav",2));	
+		songList.add(new Song("Kevin Macleod", "The Curtain Rises", src+"TheCurtainRises.mp3",28));
+		songList.add(new Song("Pierre Langer", "Untameable Fire", src+"UntameableFire.mp3",282));
 	}
+	
+
 
 	//Parameter is the name of the song to return
 	//Return: Returns song that is requested or a null song.

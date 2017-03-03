@@ -11,7 +11,7 @@ public class Song {
 		this.songName= songName;
 		this.artistName = artistName;
 		this.length = length;
-		this.setFileName(fileName);
+		this.fileName = fileName;
 		timesPlayedToday = 0;
 		
 	}
@@ -37,17 +37,19 @@ public class Song {
 	public void songPlayed(){
 		timesPlayedToday++;
 	}
-	
-	public void newDay(){
-		timesPlayedToday=0;
-	}
 
 	public String getFileName() {
 		return fileName;
 	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	
+	//Method used for NotifyObservers()
+	//When the day changes, we reset the times play today
+	//Seeing as it's a new day.
+	public void newDay(){
+		timesPlayedToday=0;
 	}
+
+
+
 
 }

@@ -18,4 +18,8 @@ checking
 valid logins/users/valid minutes
 songqueue - data structure, run(), observer
 
+*note - when actually playing songs, call songChosen in jukebox
+
+** in logic unit, make sure to set current user ,log them out
+because our current user is stored in the accountcollection
 

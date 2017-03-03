@@ -16,6 +16,7 @@ public class SongQueue implements Observer{
 	public SongQueue(SongCollection songCollection) {
 		this.songCollection = songCollection;
 		songs = new ArrayDeque<Song>();
+		
 	}//end constructor
 
 	@Override

@@ -47,7 +47,6 @@ public class JukeboxGUIPrototype extends JFrame {
 
 	// Constructor - GUI is built here
 	public JukeboxGUIPrototype() {
-
 		// place the JFrame on the screen
 		this.setSize(900, 600);
 		// this.setLocation(50, 50);

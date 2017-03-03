@@ -15,7 +15,9 @@ package songPlayerDemo;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Queue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,6 +29,7 @@ import songplayer.SongPlayer;
 
 public class PlayASongWithEachButtonClick extends JFrame {
 
+	public static Queue<String> audioFileNames = new ArrayDeque<String>();
 	/**
 	 * This program allows you to play a song every time the button is clicked.
 	 */
@@ -67,16 +70,16 @@ public class PlayASongWithEachButtonClick extends JFrame {
 
 	private int index;
 
-	ArrayList<String> audioFileNames = new ArrayList<String>();
+
 
 	public void populateList() {
 		audioFileNames.add(baseDir + "tada.wav");
 		audioFileNames.add(baseDir + "spacemusic.au");
-		audioFileNames.add(baseDir + "flute.aif");
-		audioFileNames.add(baseDir + "BlueRidgeMountainMist.mp3");
-		audioFileNames.add(baseDir + "SwingCheese.mp3");
-		audioFileNames.add(baseDir + "DeterminedTumbao.mp3");
-		audioFileNames.add(baseDir + "UntameableFire.mp3");
+//		audioFileNames.add(baseDir + "flute.aif");
+//		//audioFileNames.add(baseDir + "BlueRidgeMountainMist.mp3");
+//		audioFileNames.add(baseDir + "SwingCheese.mp3");
+//		audioFileNames.add(baseDir + "DeterminedTumbao.mp3");
+//		audioFileNames.add(baseDir + "UntameableFire.mp3");
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -87,14 +90,9 @@ public class PlayASongWithEachButtonClick extends JFrame {
 		// when each songs ends. The listener above only prints the file name
 		// passed back from the object that just finished playing that song.
 		public void actionPerformed(ActionEvent e) {
-			index++;
-			if (index >= audioFileNames.size())
-				index = 0;
-			String audioFileName = audioFileNames.get(index);
-			textField.setText(audioFileName);
-
+			
 	        // Play yet another song, quite possibly while another is playing
-			SongPlayer.playFile(new SongWaiter(), audioFileName);
+			SongPlayer.playFile(new SongWaiter(), audioFileNames.poll());
 		}
 	}
 
@@ -105,11 +103,12 @@ public class PlayASongWithEachButtonClick extends JFrame {
 	 * Note: this is a static class because it is being called from main, which
 	 * is a static context. If you are using a GUI, you won't need static
 	 */
-	private static class SongWaiter implements EndOfSongListener {
+	 static class SongWaiter implements EndOfSongListener {
 
 		public void songFinishedPlaying(EndOfSongEvent eosEvent) {
-			System.out.println("Finished " + eosEvent.fileName() + ", " + eosEvent.finishedDate() + ", "
-					+ eosEvent.finishedTime());
+			if(!audioFileNames.isEmpty()){
+				SongPlayer.playFile(new SongWaiter(), audioFileNames.poll());
+			}
 		}
 	}
 

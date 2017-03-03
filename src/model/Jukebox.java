@@ -54,6 +54,10 @@ public class Jukebox extends Observable {
 		return songs;
 	}
 
+	public AccountCollection getAccountCollection(){
+		return accounts;
+	}
+	
 	// Method called by SongSelector.
 	// Lets JukeBox know a song was chosen.
 	// If the Song is valid, we update all necessary objects

@@ -22,7 +22,6 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -50,13 +49,13 @@ public class JukeboxGUIPrototype extends JFrame {
 	public JukeboxGUIPrototype() {
 
 		// place the JFrame on the screen
-		// not exit on close
 		this.setSize(900, 600);
-		this.setLocation(50, 50);
+		// this.setLocation(50, 50);
 
 		// when user clicks 'x' on OS window
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // title frame
 		this.setTitle("Jukebox");
 
 		// center on screen

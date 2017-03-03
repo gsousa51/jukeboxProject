@@ -103,7 +103,7 @@ public class PlayASongWithEachButtonClick extends JFrame {
 	 * Note: this is a static class because it is being called from main, which
 	 * is a static context. If you are using a GUI, you won't need static
 	 */
-	 static class SongWaiter implements EndOfSongListener {
+	 public static class SongWaiter implements EndOfSongListener {
 
 		public void songFinishedPlaying(EndOfSongEvent eosEvent) {
 			if(!audioFileNames.isEmpty()){

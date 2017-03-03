@@ -23,7 +23,7 @@ public class SongCollection implements Observer{
 	
 	private void buildList(){
 		//Used to put in front of each filename parameter.
-		String src = "./songfiles";
+		String src = "./songfiles/";
 		//add all of the songs to the songlist
 		songList.add(new Song("Kevin MacLeod", "Danse Macabre", src+"DanseMacabreViolinHook.mp3",34));
 		songList.add(new Song("FreePlay Music", "Determined Tumbao",src+"DeterminedTumbao.mp3",20));
@@ -36,6 +36,9 @@ public class SongCollection implements Observer{
 		songList.add(new Song("Pierre Langer", "Untameable Fire", src+"UntameableFire.mp3",282));
 	}
 	
+	public Object[] getSongList(){
+		return songList.toArray();
+	}
 //buttonclick
 	//validate
 	//checkifQueue empty

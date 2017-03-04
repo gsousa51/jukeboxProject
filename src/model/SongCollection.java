@@ -64,20 +64,16 @@ public class SongCollection implements Observer{
 	public void update(Observable arg0, Object message) {
 		Iterator<Song> itr = songList.iterator();
 		Song currSong;
-		if(message == "DayChange"){
+		if(message == "DayChanged"){
 			while(itr.hasNext()){
 				currSong=itr.next();
 				currSong.newDay();
 			}
 		}
 		else{
-			String songName = (String)message;
-			while(itr.hasNext()){
-				currSong=itr.next();
-				if(currSong.getSongName().equals(songName)){
-					currSong.songPlayed();
-					break;
-				}
+			Song temp = this.getSong((String)message);
+			if(temp!=null){
+				temp.songPlayed();
 			}
 		}//end else
 	}//end update

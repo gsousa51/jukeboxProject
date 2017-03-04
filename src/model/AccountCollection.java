@@ -65,7 +65,7 @@ public class AccountCollection implements Observer{
 	//Reset the songs played for every account.
 	//Otherwise, there's nothing to update for AccountCollection.
 	public void update(Observable o, Object message) {
-		if(message.equals("NewDay")){
+		if(message.equals("DayChanged")){
 			Iterator<Account> itr = accountList.iterator();
 			while(itr.hasNext()){
 				itr.next().newDay();

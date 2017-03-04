@@ -30,8 +30,8 @@ public class Jukebox extends Observable {
 	}
 
 	private void addObservers() {
-		this.addObserver(accounts);
-		this.addObserver(songs);
+		addObserver(accounts);
+		addObserver(songs);
 	}
 
 	public void checkDateChanged() {
@@ -50,6 +50,10 @@ public class Jukebox extends Observable {
 	}
 	
 
+	public void newDay(){
+		setChanged();
+		notifyObservers("DayChanged");
+	}
 	public SongCollection getSongCollection() {
 		return songs;
 	}

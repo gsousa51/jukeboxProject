@@ -26,14 +26,14 @@ public class SongQueue implements Observer {
 		
 	}//end constructor
 	
-	public static void main(String argv[]){
-		SongCollection songCollec = new SongCollection();
-		SongQueue song = new SongQueue(songCollec);
-		Object[] array = songCollec.getSongList();
-		for(int i=0; i<array.length;i++){
-			song.addToQueue((Song)array[i]);
-		}
-	}
+//	public static void main(String argv[]){
+//		SongCollection songCollec = new SongCollection();
+//		SongQueue song = new SongQueue(songCollec);
+//		Object[] array = songCollec.getSongList();
+//		for(int i=0; i<array.length;i++){
+//			song.addToQueue((Song)array[i]);
+//		}
+//	}
 	public void addToQueue(Song songToAdd){
 		if(songs.isEmpty()&&!songInProcess){
 			startPlaying(songToAdd);
@@ -54,7 +54,7 @@ public class SongQueue implements Observer {
 		if(!message.equals("DayChanged")){
 			Song songToAdd = songCollection.getSong((String)message);
 			if (songToAdd !=null){
-				songs.add(songToAdd);
+				 this.addToQueue(songToAdd);
 			}//end if
 			else{
 				System.out.println("Error in song name");

@@ -22,6 +22,7 @@ public class Jukebox extends Observable {
 	public Jukebox() {
 		songs = new SongCollection();
 		accounts = new AccountCollection(this);
+		queue = new SongQueue(songs);
 		timer = new Timer(this);
 		addObservers();
 		LocalDate date = LocalDate.now();
@@ -32,21 +33,25 @@ public class Jukebox extends Observable {
 	private void addObservers() {
 		addObserver(accounts);
 		addObserver(songs);
+		addObserver(queue);
 	}
 
-	public void checkDateChanged() {
-		// Create a variable containing today's date's information
-		LocalDate dateNow = LocalDate.now();
+	//Method takes in a LocalDate object as a parameter.
+	//Compares that value Jukebox's stored values for the date.
+	public void checkDateChanged(LocalDate dateNow) {
 		// create variable's holding the current year and day.
 		int yearNow = dateNow.getYear();
 		int dayNow = dateNow.getDayOfYear();
 		// if the stored values of day or year differ from the values above, the
 		// day has changed.
-		if (dayNow != day || yearNow != year) {
+		if (dayNow > day || yearNow > year) {
 			// notify observers of this change.
 			setChanged();
 			notifyObservers("DayChanged");
+			day = dayNow;
+			year = yearNow;
 		}
+
 	}
 	
 

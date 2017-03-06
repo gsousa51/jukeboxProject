@@ -21,11 +21,14 @@ public class SongQueue implements Observer {
 	
 	public SongQueue(SongCollection songCollection) {
 		this.songCollection = songCollection;
+		//Create a new ArrayDeque to hold the songs in the playlist
 		songs = new ArrayDeque<Song>();
+		//Boolean variable to track if SongPlayer is currently playing a song.
 		songInProcess=false;
 		
 	}//end constructor
 	
+	//Main method used to test the SongQueue
 //	public static void main(String argv[]){
 //		SongCollection songCollec = new SongCollection();
 //		SongQueue song = new SongQueue(songCollec);
@@ -34,31 +37,48 @@ public class SongQueue implements Observer {
 //			song.addToQueue((Song)array[i]);
 //		}
 //	}
+	//Parameter: Song to add to our playlist
 	public void addToQueue(Song songToAdd){
+		//If our list is empty and we aren't currently playing a song
 		if(songs.isEmpty()&&!songInProcess){
+			//Send the song to the startPlaying method
 			startPlaying(songToAdd);
 		}
+		//Otherwise we're currently playing a song, just add the song
+		//To the end of our playlist.
 		else  songs.add(songToAdd);
 	}
 	
+	//Parameter: Song to begin playing
+	//Purpose: Method starts our SongPlayer, beginning with the song
+	//         given as parameter
 	private void startPlaying(Song songToAdd) {
+		//Add song to list
 		songs.add(songToAdd);
+		//Begin song player and pop the first song in our list.
 		SongPlayer.playFile(new SongWaiter(), songs.poll().getFileName());
+		//Set our flag variable to true.
 		songInProcess=true;
 		
 	}
 
+	//Method is called by Jukebox
+	//Two cases:
+	//Case 1: message == "DayChanged"
+	//     Action performed: Nothing.
+	//Case 2 message == "<name of song chosen by user>"
+	//		//Action: Find song by that name in the SongCollection
+	//				  If valid song, send song to our addToQueue(Song) method.
 	@Override
 	public void update(Observable arg0, Object message) {
-		//Only have two update messages, if it isn't daychanged it's a song being chosen.
+		//Only have two update messages, if it isn't daychanged 
+		//it's the name of the song being chosen.
 		if(!message.equals("DayChanged")){
-			Song songToAdd = songCollection.getSong((String)message);
+			//Find the song from the SongCollection
+			Song songToAdd = (Song)message;
 			if (songToAdd !=null){
 				 this.addToQueue(songToAdd);
 			}//end if
-			else{
-				System.out.println("Error in song name");
-			}//end else
 		}//end if
 	}
 	 public static class SongWaiter implements EndOfSongListener {

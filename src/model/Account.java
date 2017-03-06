@@ -47,8 +47,15 @@ public class Account {
 		return timeLeft;
 	}//end getTimesPlayedToday
 	
+	//Method called by AccountCollection when the clock passes midnight
+	//Simply resets the amount of songs played by user today
+	//Since it's a new day now.
 	public void newDay(){
 		songsPlayedToday=0;
+	}
+	
+	public boolean canPlay(Song tune){
+		return (songsPlayedToday< 3 && timeLeft - tune.getLength()>=0);
 	}
 	
 }

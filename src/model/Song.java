@@ -48,7 +48,10 @@ public class Song {
 	public void newDay(){
 		timesPlayedToday=0;
 	}
-
+	
+	public boolean canBePlayed(){
+		return timesPlayedToday < 3;
+	}
 
 
 

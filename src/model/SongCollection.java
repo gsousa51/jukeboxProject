@@ -60,6 +60,12 @@ public class SongCollection implements Observer{
 		//Return null.
 		return null;
 	}
+	
+	//Method called by the Observable class (Jukebox)
+	//Contains one of two messages for the message parameter
+	//Case 1: message = "DayChanged", we reset timesPlayed variable for every song in the collection
+	//Case 2: message = "<name of song>", we find the song in collection by that name
+	//                   and increment the amount of times it was played today.
 	@Override
 	public void update(Observable arg0, Object message) {
 		Iterator<Song> itr = songList.iterator();
@@ -71,11 +77,10 @@ public class SongCollection implements Observer{
 			}
 		}
 		else{
-			Song temp = this.getSong((String)message);
-			if(temp!=null){
-				temp.songPlayed();
-			}
-		}//end else
+			currSong = (Song)message;
+			currSong.songPlayed();
+		}
+			
 	}//end update
 	
 	

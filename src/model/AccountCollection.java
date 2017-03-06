@@ -61,9 +61,12 @@ public class AccountCollection implements Observer{
 	}
 	
 	@Override
-	//If the message is that there's a new day,
+	//If the message is "DayChanged"
 	//Reset the songs played for every account.
-	//Otherwise, there's nothing to update for AccountCollection.
+	//Otherwise, the message is the name of the song that was played.
+	//We find the song matching the name 
+	//and decrement the time left on the current user's account
+	// by the length of the song.
 	public void update(Observable o, Object message) {
 		if(message.equals("DayChanged")){
 			Iterator<Account> itr = accountList.iterator();
@@ -72,9 +75,8 @@ public class AccountCollection implements Observer{
 			}//end while
 		}
 		else{
-			Song tune = juke.getSongCollection().getSong((String)message);
-			if(tune!=null){
-				currentUser.playedSong(tune);
+			if(message!=null){
+				currentUser.playedSong((Song)message);
 			}
 			
 		}

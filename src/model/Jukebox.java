@@ -13,17 +13,16 @@ public class Jukebox extends Observable {
 
 	private SongCollection songs;
 	private AccountCollection accounts;
-	private Timer timer;
 	private SongQueue queue;
 	private int day;
 	private int year;
 
-	// Has AccountCollectionand SongCollection as observers
+	// Has AccountCollectionand SongCollection 
+	//and eventually the GUIs as Observers
 	public Jukebox() {
 		songs = new SongCollection();
 		accounts = new AccountCollection(this);
 		queue = new SongQueue(songs);
-		timer = new Timer(this);
 		addObservers();
 		LocalDate date = LocalDate.now();
 		day = date.getDayOfYear();
@@ -51,9 +50,11 @@ public class Jukebox extends Observable {
 			day = dayNow;
 			year = yearNow;
 		}
-
 	}
 	
+	public boolean validPlay(Song tune){
+		return tune.canBePlayed()&& accounts.getCurrUser().canPlay(tune);
+	}
 
 	public void newDay(){
 		setChanged();
@@ -72,7 +73,7 @@ public class Jukebox extends Observable {
 	// If the Song is valid, we update all necessary objects
 	public boolean songChosen(Song tune) {
 		setChanged();
-		notifyObservers(tune.getSongName());
+		notifyObservers(tune);
 		return true;
 	}
 

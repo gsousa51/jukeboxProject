@@ -84,6 +84,7 @@ public class SongQueue implements Observer {
 	 public static class SongWaiter implements EndOfSongListener {
 
 		public void songFinishedPlaying(EndOfSongEvent eosEvent) {
+			
 			if(!songs.isEmpty()){
 				Song temp = songs.poll();
 				if(temp!=null){

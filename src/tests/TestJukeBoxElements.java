@@ -1,6 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import java.util.Iterator;
@@ -66,6 +66,7 @@ public class TestJukeBoxElements {
 		assertEquals(user1,account.getCurrUser());
 		assertEquals(90000,user1.getTimeLeft());
 		assertEquals(0,lopingSting.getTimesPlayedToday());
+		
 		//play song 18000 times.
 		//18000*5=1500*60 which is the total time on account
 		for(int i=1; i<=18000;i++){
@@ -76,10 +77,11 @@ public class TestJukeBoxElements {
 				juke.newDay();
 			}
 		}
+
 		assertEquals(0,user1.getTimeLeft());
 		//Once we get here, there should be a test that the user can't play the song.
 		//@TO DO: create some tests here
-
+		assertFalse(juke.validPlay(lopingSting));
 		
 
 	}

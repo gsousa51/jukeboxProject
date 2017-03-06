@@ -89,26 +89,6 @@ public class Jukebox extends Observable {
 		}
 	}
 	
-	// Parameter: Song user tried to play
-	// Purpose: Validates that account is allowed to play the song.
-//	private boolean validSongChoice(Song tune) {
-//		Account currUser = accounts.getCurrUser();
-//		// User can only play 2 songs per day.
-//		if (currUser.getSongsPlayedToday() >= 2) {
-//			return false;
-//		}
-//		// If user's time left is less than length of song, return false
-//		if (currUser.getTimeLeft() - tune.getLength() < 0) {
-//			return false;
-//		}
-//		// If song has already been played five times today, return false
-//		if (tune.getTimesPlayedToday() >= 5) {
-//			return false;
-//		}
-//		// if we get here, it passes all conditions.
-//		// we can play the song.
-//		return true;
-//	}
 
 
 

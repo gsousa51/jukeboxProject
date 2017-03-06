@@ -98,6 +98,7 @@ public class TestJukeBoxElements {
 		Account user2 = account.getAccount("Devon");
 		Account user3 = account.getAccount("River");
 		Account user4 = account.getAccount("Ryan");
+		
 		assertEquals(null,account.getCurrUser());
 		
 		account.setCurrentUser(user2);
@@ -111,6 +112,9 @@ public class TestJukeBoxElements {
 		assertEquals(3,songs.getSong("The Curtain Rises").getTimesPlayedToday());
 		assertEquals(3,user2.getSongsPlayedToday());
 		
+		//@TO DO:
+		// Maybe throw some tests in here to make sure user 2 can't play songs now?
+		//Also check that the song "The Curtain Rises" can't be played
 		account.loggedOut();
 		assertEquals(null,account.getCurrUser());
 		
@@ -124,6 +128,10 @@ public class TestJukeBoxElements {
 		assertEquals(3,songs.getSong("Untameable Fire").getTimesPlayedToday());
 		assertEquals(3,user1.getSongsPlayedToday());
 		
+		//@TO DO:
+		// Maybe throw some tests in here to make sure user1 can't play songs now?
+		//Also check that the song "Untameable Fire" can't be played
+		
 		//We use the date that we made above.
 		//Should reset all of the songs' and user's plays for today
 		juke.checkDateChanged(date);
@@ -132,8 +140,7 @@ public class TestJukeBoxElements {
 		assertEquals(0,user2.getSongsPlayedToday());
 		assertEquals(0,songs.getSong("Untameable Fire").getTimesPlayedToday());
 		assertEquals(0,songs.getSong("The Curtain Rises").getTimesPlayedToday());
-		
-	}
+	}//end tests
 	
 	
 

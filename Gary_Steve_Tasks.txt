@@ -20,6 +20,9 @@ songqueue - data structure, run(), observer
 
 *note - when actually playing songs, call songChosen in jukebox
 
+for checking song/account, they will return null if the thing is NOT in the
+account
+
 ** in logic unit, make sure to set current user ,log them out
 because our current user is stored in the accountcollection
 

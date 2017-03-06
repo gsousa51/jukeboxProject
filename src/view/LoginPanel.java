@@ -17,27 +17,24 @@ displays some information about the account if a user is logged in
 
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import javax.swing.Box;
+
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import model.Jukebox;
 
 // A JPanel, for modularity
 public class LoginPanel extends JPanel {
 
 
     // Constructor 
-    public LoginPanel() {
+    public LoginPanel(Jukebox jukebox) {
 
         // set layout and background color to match Rick's GUI
         this.setLayout(new GridLayout(4, 2));

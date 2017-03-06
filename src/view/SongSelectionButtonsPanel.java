@@ -16,27 +16,35 @@ Jukebox
 
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import javax.swing.Box;
+
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+
+import model.Jukebox;
+import model.Song;
+import model.SongCollection;
+import model.SongQueue;
 
 // A JPanel, for modularity
 public class SongSelectionButtonsPanel extends JPanel {
 
 
     // Constructor 
-    public SongSelectionButtonsPanel() {
+    public SongSelectionButtonsPanel(Jukebox jukebox) {
+
+
+        // TODO delete
+        Jukebox jb = new Jukebox();
+        //SongQueue sq = new SongQueue();
+        SongCollection songCollec = new SongCollection();
+        SongQueue song = new SongQueue(songCollec);
+        Object[] array = songCollec.getSongList();
+        // for(int i=0; i<array.length;i++){
+            // song.addToQueue((Song)array[i]);
+        // }
+    
 
         // The panel containing the buttons
         // NOTE - 3x2 layout intentional to correctly layout buttons similar
@@ -47,8 +55,11 @@ public class SongSelectionButtonsPanel extends JPanel {
         // choose song1
         JButton selectSong1Button = new JButton("Select song 1");
         buttonPanel.add(selectSong1Button);
-        selectSong1Button.addActionListener(event ->
-                System.out.println("Select song1"));
+        selectSong1Button.addActionListener(event -> {
+                System.out.println("Select song1");
+                // jb.songChosen(songCollec.getSong("Tada"));
+                //jb.songChosen(songCollec.getSong("Tada"));
+        });
 
         // 'spacer' to manipulate layout
         buttonPanel.add(new JLabel(""));

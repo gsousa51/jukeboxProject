@@ -23,3 +23,5 @@ songqueue - data structure, run(), observer
 ** in logic unit, make sure to set current user ,log them out
 because our current user is stored in the accountcollection
 
+
+Dots in password field instead of asterisks - is that possible?

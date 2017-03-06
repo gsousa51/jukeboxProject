@@ -22,6 +22,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import view.LoginPanel;
+import view.SongSelectionButtonsPanel;
 
 // This Jukebox type extends Jframe
 public class RunJukeboxGUI {
@@ -32,12 +33,18 @@ public class RunJukeboxGUI {
 
         // Set up nimbus to match Rick's GUI
         attemptToSetNimbusLookAndFeel();
-        UIManager.put("control", Color.WHITE);
 
-        // Pop the GUI
+        // Frame to hold panels
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Add the select-songs-with-buttons panel
+        window.add(new SongSelectionButtonsPanel());
+
+        // Add the login panel
         window.add(new LoginPanel());
+
+        // Pop the GUI
         window.pack();
         window.setVisible(true);
 
@@ -63,6 +70,7 @@ public class RunJukeboxGUI {
         // nimbus wasn't found
         catch (Exception e) {
 
+            // system default L&F will be used
         }          
     }
 }

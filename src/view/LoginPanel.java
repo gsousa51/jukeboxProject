@@ -55,8 +55,17 @@ public class LoginPanel extends JPanel {
 
         // log in/out (wording and order to match Rick's GUI)
         JButton signOutButton = new JButton("Sign out");
+        signOutButton.addActionListener(event -> 
+                System.out.println("Sign out"));
         this.add(signOutButton);
-        JButton loginButton = new JButton("Login");
+
+        JButton loginButton = new JButton("Attempt login");
+        loginButton.addActionListener(event -> {
+                System.out.println("Attempt login:");
+                System.out.print("[-]User: ");
+                System.out.println("----");
+                System.out.print("[-]Password: ");
+                System.out.println("----");});
         this.add(loginButton);
 
         // account information for logged in user

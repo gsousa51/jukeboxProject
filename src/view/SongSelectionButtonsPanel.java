@@ -47,12 +47,16 @@ public class SongSelectionButtonsPanel extends JPanel {
         // choose song1
         JButton selectSong1Button = new JButton("Select song 1");
         buttonPanel.add(selectSong1Button);
+        selectSong1Button.addActionListener(event ->
+                System.out.println("Select song1"));
 
         // 'spacer' to manipulate layout
         buttonPanel.add(new JLabel(""));
 
         JButton selectSong2Button = new JButton("Select song 2");
         buttonPanel.add(selectSong2Button);
+        selectSong2Button.addActionListener(event ->
+                System.out.println("Select song2"));
 
         // 'spacer' to manipulate layout
         buttonPanel.add(new JLabel(""));

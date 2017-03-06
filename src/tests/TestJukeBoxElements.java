@@ -82,6 +82,8 @@ public class TestJukeBoxElements {
 		//Once we get here, there should be a test that the user can't play the song.
 		//@TO DO: create some tests here
 		assertFalse(juke.validPlay(lopingSting));
+		//Make sure it can't play another song, either.
+		assertFalse(juke.validPlay(songs.getSong("Tada")));
 		
 
 	}
@@ -115,13 +117,15 @@ public class TestJukeBoxElements {
 		assertEquals(3,user2.getSongsPlayedToday());
 		
 		//@TO DO:
-		// Maybe throw some tests in here to make sure user 2 can't play songs now?
-		//Also check that the song "The Curtain Rises" can't be played
+		assertFalse(juke.validPlay(songs.getSong("The Curtain Rises")));
+		assertFalse(juke.validPlay(songs.getSong("Tada")));
 		account.loggedOut();
 		assertEquals(null,account.getCurrUser());
-		
 		account.setCurrentUser(user1);
 		assertEquals(user1, account.getCurrUser());
+		assertTrue(juke.validPlay(songs.getSong("Tada")));
+		//Shouldn't be able to play, already has three plays
+		assertFalse(juke.validPlay(songs.getSong("The Curtain Rises")));
 		
 		juke.songChosen(songs.getSong("Untameable Fire"));
 		juke.songChosen(songs.getSong("Untameable Fire"));
@@ -144,6 +148,136 @@ public class TestJukeBoxElements {
 		assertEquals(0,songs.getSong("The Curtain Rises").getTimesPlayedToday());
 	}//end tests
 	
+	@Test
+	public void testValidAccounts(){
+		Jukebox juke = new Jukebox();
+		AccountCollection account = juke.getAccountCollection();
+
+		Account user1 = account.getAccount("Chris");
+		Account user2 = account.getAccount("Devon");
+		Account user3 = account.getAccount("River");
+		Account user4 = account.getAccount("Ryan");
+		
+		assertTrue(juke.validAccount("Chris", "1"));
+		assertTrue(juke.validAccount("Devon","22"));
+		assertTrue(juke.validAccount("River", "333"));
+		assertTrue(juke.validAccount("Ryan","4444"));
+		assertFalse(juke.validAccount("RYan", "4444"));
+		assertFalse(juke.validAccount("Ryan", "1"));
+		assertFalse(juke.validAccount("Chris", "4444"));
+		assertFalse(juke.validAccount("chris", "1"));
+		assertFalse(juke.validAccount("RYAN", "4444"));
+	}
+	
+	@Test
+	public void makeAllSongsMaxedOut(){
+		Jukebox juke = new Jukebox();
+		AccountCollection account = juke.getAccountCollection();
+		SongCollection songs = juke.getSongCollection();
+		
+		Account user1 = account.getAccount("Chris");
+		Account user2 = account.getAccount("Devon");
+		Account user3 = account.getAccount("River");
+		Account user4 = account.getAccount("Ryan");
+		
+		Song song1 = songs.getSong("Tada");
+		Song song2 = songs.getSong("Swing Cheese");
+		Song song3 = songs.getSong("Flute");
+		
+		Song song4 = songs.getSong("Space Music");
+		
+		account.setCurrentUser(user1);
+		assertTrue(juke.validPlay(song1));
+		juke.songChosen(song1);
+		account.loggedOut();
+		account.setCurrentUser(user2);
+		assertTrue(juke.validPlay(song1));
+		juke.songChosen(song1);
+		account.loggedOut();
+		account.setCurrentUser(user3);
+		assertTrue(juke.validPlay(song1));
+		juke.songChosen(song1);
+		assertFalse(juke.validPlay(song1));
+		account.loggedOut();
+
+		account.setCurrentUser(user1);
+		assertTrue(juke.validPlay(song2));
+		juke.songChosen(song2);
+		account.loggedOut();
+		account.setCurrentUser(user2);
+		assertTrue(juke.validPlay(song2));
+		juke.songChosen(song2);
+		account.loggedOut();
+		account.setCurrentUser(user3);
+		assertTrue(juke.validPlay(song2));
+		juke.songChosen(song2);
+		assertFalse(juke.validPlay(song2));
+		account.loggedOut();
+		
+		
+		account.setCurrentUser(user1);
+		assertTrue(juke.validPlay(song3));
+		juke.songChosen(song3);
+		account.loggedOut();
+		account.setCurrentUser(user2);
+		assertTrue(juke.validPlay(song3));
+		juke.songChosen(song3);
+		account.loggedOut();
+		account.setCurrentUser(user3);
+		assertTrue(juke.validPlay(song3));
+		juke.songChosen(song3);
+		account.loggedOut();
+		//change user to a valid user for next test.
+		account.setCurrentUser(user4);
+		assertFalse(juke.validPlay(song3));
+		account.loggedOut();
+		
+		//Now all of the accounts should be maxed out as well
+		//We'll test with a "fresh" song
+		account.setCurrentUser(user1);
+		assertFalse(juke.validPlay(song4));
+		account.setCurrentUser(user2);
+		assertFalse(juke.validPlay(song4));
+		account.setCurrentUser(user3);
+		assertFalse(juke.validPlay(song4));
+		
+		//should reset all accounts and songs
+		juke.newDay();
+		
+		
+		account.setCurrentUser(user1);
+		assertTrue(juke.validPlay(song4));
+		account.setCurrentUser(user2);
+		assertTrue(juke.validPlay(song4));
+		account.setCurrentUser(user3);
+		assertTrue(juke.validPlay(song4));
+		
+		account.setCurrentUser(user1);
+		assertTrue(juke.validPlay(song1));
+		account.setCurrentUser(user2);
+		assertTrue(juke.validPlay(song1));
+		account.setCurrentUser(user3);
+		assertTrue(juke.validPlay(song1));
+		
+		account.setCurrentUser(user1);
+		assertTrue(juke.validPlay(song2));
+		account.setCurrentUser(user2);
+		assertTrue(juke.validPlay(song2));
+		account.setCurrentUser(user3);
+		assertTrue(juke.validPlay(song2));
+		
+		account.setCurrentUser(user1);
+		assertTrue(juke.validPlay(song3));
+		account.setCurrentUser(user2);
+		assertTrue(juke.validPlay(song3));
+		account.setCurrentUser(user3);
+		assertTrue(juke.validPlay(song3));
+		
+		
+	}
+	
+
+
 	
 
 }

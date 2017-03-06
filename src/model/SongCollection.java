@@ -70,7 +70,7 @@ public class SongCollection implements Observer{
 	public void update(Observable arg0, Object message) {
 		Iterator<Song> itr = songList.iterator();
 		Song currSong;
-		if(message == "DayChanged"){
+		if(message .equals("DayChanged")){
 			while(itr.hasNext()){
 				currSong=itr.next();
 				currSong.newDay();

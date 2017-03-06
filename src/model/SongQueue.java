@@ -71,14 +71,13 @@ public class SongQueue implements Observer {
 	//				  If valid song, send song to our addToQueue(Song) method.
 	@Override
 	public void update(Observable arg0, Object message) {
+
 		//Only have two update messages, if it isn't daychanged 
 		//it's the name of the song being chosen.
 		if(!message.equals("DayChanged")){
 			//Find the song from the SongCollection
 			Song songToAdd = (Song)message;
-			if (songToAdd !=null){
 				 this.addToQueue(songToAdd);
-			}//end if
 		}//end if
 	}
 	 public static class SongWaiter implements EndOfSongListener {

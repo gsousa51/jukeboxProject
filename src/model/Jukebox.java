@@ -76,7 +76,19 @@ public class Jukebox extends Observable {
 		notifyObservers(tune);
 		return true;
 	}
-
+	
+	//Parameters: The string values of username and password given by user
+	//Purpose: Checks if there's a valid account matching the parameters
+	public boolean validAccount(String username, String password){
+		Account tempAccount = accounts.getAccount(username);
+		if(tempAccount==null){
+			return false;
+		}
+		else{
+			return tempAccount.getPassword().equals(password);
+		}
+	}
+	
 	// Parameter: Song user tried to play
 	// Purpose: Validates that account is allowed to play the song.
 //	private boolean validSongChoice(Song tune) {

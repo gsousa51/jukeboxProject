@@ -3,6 +3,7 @@
 //Purpose: Keeps a list of songs that need to be played and plays them in FIFO order.
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayDeque;
 import java.util.Observable;
 import java.util.Observer;
@@ -16,8 +17,10 @@ import songplayer.SongPlayer;
 public class SongQueue implements Observer {
 
 	SongCollection songCollection;
+	private static Jukebox juke;
 	private static Queue<Song> songs;
 	private static boolean songInProcess;
+	
 	
 	public SongQueue(SongCollection songCollection) {
 		this.songCollection = songCollection;
@@ -25,6 +28,7 @@ public class SongQueue implements Observer {
 		songs = new ArrayDeque<Song>();
 		//Boolean variable to track if SongPlayer is currently playing a song.
 		songInProcess=false;
+		juke=null;
 		
 	}//end constructor
 	
@@ -70,8 +74,8 @@ public class SongQueue implements Observer {
 	//		//Action: Find song by that name in the SongCollection
 	//				  If valid song, send song to our addToQueue(Song) method.
 	@Override
-	public void update(Observable arg0, Object message) {
-
+	public void update(Observable jukebox, Object message) {
+		juke=(Jukebox)jukebox;
 		//Only have two update messages, if it isn't daychanged 
 		//it's the name of the song being chosen.
 		if(!message.equals("DayChanged")){
@@ -83,7 +87,10 @@ public class SongQueue implements Observer {
 	 public static class SongWaiter implements EndOfSongListener {
 
 		public void songFinishedPlaying(EndOfSongEvent eosEvent) {
-			
+			//After song is over, check if the date has changed.
+			if(juke!=null){
+				juke.checkDateChanged(LocalDate.now());
+			}
 			if(!songs.isEmpty()){
 				Song temp = songs.poll();
 				if(temp!=null){

@@ -96,7 +96,7 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
 
 
 
-            jukebox.songChosen(jukebox.getSongCollection().getSong("tada"));
+            jukebox.songChosen(jukebox.getSongCollection().getSong("Tada"));
             // jukebox.
         }
 

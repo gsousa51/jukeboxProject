@@ -78,7 +78,7 @@ public class SongQueue implements Observer {
 		juke=(Jukebox)jukebox;
 		//Only have two update messages, if it isn't daychanged 
 		//it's the name of the song being chosen.
-		if(!message.equals("DayChanged")){
+		if(message instanceof Song){
 			//Find the song from the SongCollection
 			Song songToAdd = (Song)message;
 				 this.addToQueue(songToAdd);

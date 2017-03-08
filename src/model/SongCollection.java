@@ -77,8 +77,7 @@ public class SongCollection implements Observer{
 			}
 		}
 		else{
-			currSong = (Song)message;
-			currSong.songPlayed();
+			((Song)message).songPlayed();
 		}
 			
 	}//end update

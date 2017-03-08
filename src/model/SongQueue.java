@@ -41,7 +41,6 @@ public class SongQueue implements Observer {
 		Song tada = songCollec.getSong("Tada");
 		Song spaceMusic = songCollec.getSong("Space Music");
 		juke.getAccountCollection().setCurrentUser(juke.getAccountCollection().getAccount("Chris"));
-		for(int i=0; i<array.length;i++){
 			juke.songChosen(tada);
 			juke.songChosen(tada);
 			juke.songChosen(tada);
@@ -49,8 +48,6 @@ public class SongQueue implements Observer {
 				juke.songChosen(tada);
 			else
 				juke.songChosen(spaceMusic);
-				
-		}
 	}
 	//Parameter: Song to add to our playlist
 	public void addToQueue(Song songToAdd){
@@ -108,6 +105,7 @@ public class SongQueue implements Observer {
 					SongPlayer.playFile(new SongWaiter(), temp.getFileName());
 				}
 				else songInProcess=false;
+				System.out.println("LIST IS EMPTY, PLAYING IS OVER");
 			}
 		}
 	}

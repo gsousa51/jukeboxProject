@@ -106,8 +106,6 @@ public class LoginPanel extends JPanel implements Observer {
 
             return false;
 
-            // TODO set currentuser in jukebox/collection/whatever gary had set
-            // up
             // TODO fetch metrics and display
         }
 

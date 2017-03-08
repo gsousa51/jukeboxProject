@@ -80,8 +80,24 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
 
     private boolean requestSong1() {
 
+        // nobody is logged in
         if (jukebox.getAccountCollection().getCurrUser() == null) {
+
             JOptionPane.showMessageDialog(null, "Nobody is logged in.");
+            return false;
+        }
+
+        // someone is logged in, attempt song play
+        else {
+            
+            // TODO need to talk to gary about playing songs - 
+            // currently jukebox does not expose its songqueue... in the test
+            // code we has just made a song queue by itsef - rectify this
+
+
+
+            // jukebox.songChosen(jukebox.getSongCollection().getSong("tada"));
+            // jukebox.
         }
 
         // TODO delete

@@ -17,6 +17,8 @@ Jukebox
 package view;
 
 import java.awt.GridLayout;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -28,7 +30,7 @@ import model.SongCollection;
 import model.SongQueue;
 
 // A JPanel, for modularity
-public class SongSelectionButtonsPanel extends JPanel {
+public class SongSelectionButtonsPanel extends JPanel implements Observer {
 
 
     // Constructor 
@@ -77,4 +79,13 @@ public class SongSelectionButtonsPanel extends JPanel {
         this.add(buttonPanel);
 
     } // JukeboxGUI constructor
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 }

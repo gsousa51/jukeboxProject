@@ -1,17 +1,17 @@
 /*
-Gary Sousa & Stephen Nolan
-CS 335
-Spring 2017
+   Gary Sousa & Stephen Nolan
+   CS 335
+   Spring 2017
 Instructor: Rick Mercer
 
 Assignment: Project 5 - Jukebox
-       Due: Friday 10 March 2017 @ 10:00p
+Due: Friday 10 March 2017 @ 10:00p
 
 
 This class creates a JPanel that allows Jukebox users to authenticate. It also 
 displays some information about the account if a user is logged in
 
-** NOTE - design 'choices' here are to match Rick's provided GUI: labels, etc
+ ** NOTE - design 'choices' here are to match Rick's provided GUI: labels, etc
 
 */
 
@@ -19,6 +19,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -30,7 +32,7 @@ import javax.swing.SwingConstants;
 import model.Jukebox;
 
 // A JPanel, for modularity
-public class LoginPanel extends JPanel {
+public class LoginPanel extends JPanel implements Observer {
 
 
     // Constructor 
@@ -54,16 +56,12 @@ public class LoginPanel extends JPanel {
         // log in/out (wording and order to match Rick's GUI)
         JButton signOutButton = new JButton("Sign out");
         signOutButton.addActionListener(event -> 
-                System.out.println("Sign out"));
+                attemptSignOut());
         this.add(signOutButton);
 
         JButton loginButton = new JButton("Attempt login");
-        loginButton.addActionListener(event -> {
-                System.out.println("Attempt login:");
-                System.out.print("[-]User: ");
-                System.out.println("----");
-                System.out.print("[-]Password: ");
-                System.out.println("----");});
+        loginButton.addActionListener(event -> 
+                attemptLogIn());
         this.add(loginButton);
 
         // account information for logged in user
@@ -71,4 +69,31 @@ public class LoginPanel extends JPanel {
         this.add(new JLabel("X played, xx:xx:xx TODO"));
 
     } // JukeboxGUI constructor
+
+
+    private boolean attemptLogIn() {
+
+
+        // TODO delete
+        return false;
+    }
+
+
+
+    private boolean attemptSignOut() {
+
+        // TODO delete
+        return false;
+    }
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
 }

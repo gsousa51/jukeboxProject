@@ -104,7 +104,7 @@ public class LoginPanel extends JPanel implements Observer {
             // set this user as the current user in the account collection
             jukebox.getAccountCollection().setCurrentUser(jukebox.getAccountCollection().getAccount(name));
 
-            return false;
+            return true;
 
             // TODO fetch metrics and display
         }

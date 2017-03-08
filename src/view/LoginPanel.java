@@ -48,6 +48,7 @@ public class LoginPanel extends JPanel {
         // password entry
         this.add(new JLabel("Password: ", SwingConstants.RIGHT));
         JPasswordField loginPassword = new JPasswordField();
+        loginPassword.setEchoChar('•');
         this.add(loginPassword);
 
         // log in/out (wording and order to match Rick's GUI)

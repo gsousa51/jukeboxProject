@@ -33,14 +33,25 @@ public class SongQueue implements Observer {
 	}//end constructor
 	
 	//Main method used to test the SongQueue
-//	public static void main(String argv[]){
-//		SongCollection songCollec = new SongCollection();
-//		SongQueue song = new SongQueue(songCollec);
-//		Object[] array = songCollec.getSongList();
-//		for(int i=0; i<array.length;i++){
-//			song.addToQueue((Song)array[i]);
-//		}
-//	}
+	public static void main(String argv[]){
+		Jukebox juke = new Jukebox();
+		SongCollection songCollec = juke.getSongCollection();
+		SongQueue song = new SongQueue(songCollec);
+		Object[] array = songCollec.getSongList();
+		Song tada = songCollec.getSong("Tada");
+		Song spaceMusic = songCollec.getSong("Space Music");
+		juke.getAccountCollection().setCurrentUser(juke.getAccountCollection().getAccount("Chris"));
+		for(int i=0; i<array.length;i++){
+			juke.songChosen(tada);
+			juke.songChosen(tada);
+			juke.songChosen(tada);
+			if(juke.validPlay(songCollec.getSong("Tada")))
+				juke.songChosen(tada);
+			else
+				juke.songChosen(spaceMusic);
+				
+		}
+	}
 	//Parameter: Song to add to our playlist
 	public void addToQueue(Song songToAdd){
 		//If our list is empty and we aren't currently playing a song

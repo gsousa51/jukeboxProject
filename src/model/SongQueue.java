@@ -103,10 +103,11 @@ public class SongQueue implements Observer {
 				Song temp = songs.poll();
 				if(temp!=null){
 					SongPlayer.playFile(new SongWaiter(), temp.getFileName());
+					System.out.println("NOW PLAYING " + temp.getSongName());
 				}
-				else songInProcess=false;
-				System.out.println("LIST IS EMPTY, PLAYING IS OVER");
 			}
+			else songInProcess=false;
+			System.out.println("STOPPED PLAYING");
 		}
 	}
 	

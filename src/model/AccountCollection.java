@@ -67,7 +67,7 @@ public class AccountCollection implements Observer {
 	// and decrement the time left on the current user's account
 	// by the length of the song.
 	public void update(Observable o, Object message) {
-		if (message.equals("DayChanged")) {
+		if (message instanceof String) {
 			Iterator<Account> itr = accountList.iterator();
 			while (itr.hasNext()) {
 				itr.next().newDay();

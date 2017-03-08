@@ -35,12 +35,18 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
 
     // Instance variables
     private Jukebox jukebox;
+    private Song song1;
+    private Song song2;
 
     // Constructor 
     public SongSelectionButtonsPanel(Jukebox jukebox) {
 
         // contain the jukebox
         this.jukebox = jukebox;
+
+        // Save the songs in instance variables
+        song1 = jukebox.getSongCollection().getSong("Tada");
+        song2 = jukebox.getSongCollection().getSong("Space Music");
 
         // The panel containing the buttons
         // NOTE - 3x2 layout intentional to correctly layout buttons similar
@@ -75,6 +81,10 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
         // TODO Auto-generated method stub
         System.out.println("SongSelectionButtonsPanel received update message from jukebox.");
+        System.out.print("Logged in: ");
+        System.out.println(jukebox.getAccountCollection().getCurrUser().getName());
+        System.out.print("Current time left: ");
+        System.out.println(jukebox.getAccountCollection().getCurrUser().getTimeLeft());
 
     }
 
@@ -96,7 +106,9 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
 
 
 
-            jukebox.songChosen(jukebox.getSongCollection().getSong("Tada"));
+            System.out.println("request tada");
+            jukebox.songChosen(this.song1);
+            // this.jukebox.songChosen(jukebox.getSongCollection().getSong("Tada"));
             // jukebox.
         }
 
@@ -108,6 +120,21 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
 
         if (jukebox.getAccountCollection().getCurrUser() == null) {
             JOptionPane.showMessageDialog(null, "Nobody is logged in.");
+        }
+
+        // someone is logged in, attempt song play
+        else {
+            
+            // TODO need to talk to gary about playing songs - 
+            // currently jukebox does not expose its songqueue... in the test
+            // code we has just made a song queue by itsef - rectify this
+
+
+
+            System.out.println("request spacemusic");
+            jukebox.songChosen(this.song2);
+            // this.jukebox.songChosen(jukebox.getSongCollection().getSong("Tada"));
+            // jukebox.
         }
 
         // TODO delete

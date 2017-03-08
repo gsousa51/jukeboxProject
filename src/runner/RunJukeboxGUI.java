@@ -16,16 +16,15 @@ model Rick's provided GUI
 
 package runner;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import model.Account;
+import model.Jukebox;
+import model.Song;
 import view.LoginPanel;
 import view.SongSelectionButtonsPanel;
 
@@ -35,6 +34,12 @@ public class RunJukeboxGUI {
 
     // main method to run everything
     public static void main(String[] args) {
+
+        // TODO clean up - testing here
+        // Set up model
+        Jukebox jukebox = new Jukebox();
+        // Song lopingString = jukebox.getSongCollection().getSong("Loping Sting");
+        // Account user1 = jukebox.getAccountCollection().getAccount("Chris");
 
         // Set up nimbus to match Rick's GUI
         attemptToSetNimbusLookAndFeel();
@@ -46,10 +51,10 @@ public class RunJukeboxGUI {
         window.setLayout(new GridLayout(3, 1));
 
         // Add the select-songs-with-buttons panel
-        window.add(new SongSelectionButtonsPanel());
+        window.add(new SongSelectionButtonsPanel(jukebox));
 
         // Add the login panel
-        window.add(new LoginPanel());
+        window.add(new LoginPanel(jukebox));
 
         // Pop the GUI
         window.pack();

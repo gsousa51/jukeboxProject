@@ -22,6 +22,7 @@ import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Jukebox;
@@ -32,21 +33,14 @@ import model.SongQueue;
 // A JPanel, for modularity
 public class SongSelectionButtonsPanel extends JPanel implements Observer {
 
+    // Instance variables
+    private Jukebox jukebox;
 
     // Constructor 
     public SongSelectionButtonsPanel(Jukebox jukebox) {
 
-
-        // TODO delete
-        Jukebox jb = new Jukebox();
-        //SongQueue sq = new SongQueue();
-        SongCollection songCollec = new SongCollection();
-        SongQueue song = new SongQueue(songCollec);
-        Object[] array = songCollec.getSongList();
-        // for(int i=0; i<array.length;i++){
-            // song.addToQueue((Song)array[i]);
-        // }
-    
+        // contain the jukebox
+        this.jukebox = jukebox;
 
         // The panel containing the buttons
         // NOTE - 3x2 layout intentional to correctly layout buttons similar
@@ -57,11 +51,8 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
         // choose song1
         JButton selectSong1Button = new JButton("Select song 1");
         buttonPanel.add(selectSong1Button);
-        selectSong1Button.addActionListener(event -> {
-                System.out.println("Select song1");
-                // jb.songChosen(songCollec.getSong("Tada"));
-                //jb.songChosen(songCollec.getSong("Tada"));
-        });
+        selectSong1Button.addActionListener(event -> 
+                requestSong1());
 
         // 'spacer' to manipulate layout
         buttonPanel.add(new JLabel(""));
@@ -69,7 +60,7 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
         JButton selectSong2Button = new JButton("Select song 2");
         buttonPanel.add(selectSong2Button);
         selectSong2Button.addActionListener(event ->
-                System.out.println("Select song2"));
+                requestSong2());
 
         // 'spacer' to manipulate layout
         buttonPanel.add(new JLabel(""));
@@ -82,10 +73,30 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
+        // TODO Auto-generated method stub
+        System.out.println("SongSelectionButtonsPanel received update message from jukebox.");
 
+    }
+
+    private boolean requestSong1() {
+
+        if (jukebox.getAccountCollection().getCurrUser() == null) {
+            JOptionPane.showMessageDialog(null, "Nobody is logged in.");
+        }
+
+        // TODO delete
+        return false;
+    }
+
+    private boolean requestSong2() {
+
+        if (jukebox.getAccountCollection().getCurrUser() == null) {
+            JOptionPane.showMessageDialog(null, "Nobody is logged in.");
+        }
+
+        // TODO delete
+        return false;
+    }
 
 
 }

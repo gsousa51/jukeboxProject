@@ -51,10 +51,17 @@ public class RunJukeboxGUI {
         window.setLayout(new GridLayout(3, 1));
 
         // Add the select-songs-with-buttons panel
-        window.add(new SongSelectionButtonsPanel(jukebox));
+        SongSelectionButtonsPanel selectionArea = 
+            new SongSelectionButtonsPanel(jukebox);
+        window.add(selectionArea);
 
         // Add the login panel
-        window.add(new LoginPanel(jukebox));
+        LoginPanel loginArea = new LoginPanel(jukebox);
+        window.add(loginArea);
+
+        // register panels as Jukebox observers
+        jukebox.addObserver(selectionArea);
+        jukebox.addObserver(loginArea);
 
         // Pop the GUI
         window.pack();

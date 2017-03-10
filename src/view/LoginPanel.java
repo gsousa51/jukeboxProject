@@ -114,10 +114,13 @@ public class LoginPanel extends JPanel implements Observer {
 
 
             // TODO fetch metrics and display
-
+            int userSongsPlayedToday = jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday();
+            int userSecondsLeft = jukebox.getAccountCollection().getCurrUser().getTimeLeft();
+            String currentData = String.format("%02d:%02d:%02d", userSecondsLeft/3600, 
+                    userSecondsLeft%3600/60, userSecondsLeft%3600%60);
+            this.statusData.setText(userSongsPlayedToday + " selected, " + currentData);
             return true;
         }
-
     }
 
 
@@ -155,8 +158,12 @@ public class LoginPanel extends JPanel implements Observer {
 
         // TODO delete
         System.out.println("LoginPanel received update message from jukebox.");
-        int userSongsLeft = 3 - jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday();
-        this.statusData.setText("" + userSongsLeft);
+
+        int userSongsPlayedToday = jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday();
+        int userSecondsLeft = jukebox.getAccountCollection().getCurrUser().getTimeLeft();
+        String currentData = String.format("%02d:%02d:%02d", userSecondsLeft/3600, 
+                userSecondsLeft%3600/60, userSecondsLeft%3600%60);
+        this.statusData.setText(userSongsPlayedToday + " selected, " + currentData);
 
     }
 }

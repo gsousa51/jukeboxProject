@@ -2,6 +2,9 @@
 #
 # Tasks for Jukebox Iteration 1
 
+[Either]
+Arrange packages
+
 [Gary]
 song
 songcollection

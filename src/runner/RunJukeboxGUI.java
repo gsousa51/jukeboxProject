@@ -65,6 +65,7 @@ public class RunJukeboxGUI {
 
         // Pop the GUI
         window.pack();
+        window.setLocationRelativeTo(null);
         window.setVisible(true);
 
     } // method main

@@ -79,12 +79,7 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-        // TODO Auto-generated method stub
         System.out.println("SongSelectionButtonsPanel received update message from jukebox.");
-        System.out.print("Logged in: ");
-        System.out.println(jukebox.getAccountCollection().getCurrUser().getName());
-        System.out.print("Current time left: ");
-        System.out.println(jukebox.getAccountCollection().getCurrUser().getTimeLeft());
 
     }
 
@@ -102,14 +97,15 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
             
             System.out.println("request tada");
 
-            if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song1)) {
+            if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song1) 
+                    && jukebox.validPlay(this.song1)) {
+
                 jukebox.songChosen(this.song1);
+                return true;
             }
-            // this.jukebox.songChosen(jukebox.getSongCollection().getSong("Tada"));
-            // jukebox.
         }
 
-        // TODO delete
+        // shouldn't ever be reached
         return false;
     }
 
@@ -122,19 +118,17 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
         // someone is logged in, attempt song play
         else {
             
-
             System.out.println("request spacemusic");
 
-            if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song2)) {
+            if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song2)
+                    && jukebox.validPlay(this.song2)) {
+
                 jukebox.songChosen(this.song2);
+                return true;
             }
-            // this.jukebox.songChosen(jukebox.getSongCollection().getSong("Tada"));
-            // jukebox.
         }
 
-        // TODO delete
+        // shouldn't ever be reached
         return false;
     }
-
-
 }

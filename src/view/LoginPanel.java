@@ -1,7 +1,7 @@
 /*
-   Gary Sousa & Stephen Nolan
-   CS 335
-   Spring 2017
+Gary Sousa & Stephen Nolan
+CS 335
+Spring 2017
 Instructor: Rick Mercer
 
 Assignment: Project 5 - Jukebox
@@ -60,9 +60,12 @@ public class LoginPanel extends JPanel implements Observer {
         this.loginName = new JTextField(15);
         this.add(loginName);
 
-        // password entry
+        // password entry - focus listener for convenience and to match Rick's 
+        // displayed implementation
         this.add(new JLabel("Password: ", SwingConstants.RIGHT));
         this.loginPassword = new JPasswordField();
+        loginPassword.setEchoChar('•');
+
         loginPassword.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent event) {
                 SwingUtilities.invokeLater(new Runnable() {
@@ -72,10 +75,10 @@ public class LoginPanel extends JPanel implements Observer {
                 });
             }
         });
-        loginPassword.setEchoChar('•');
         this.add(loginPassword);
 
         // log in/out (wording and order to match Rick's GUI)
+
         // sign out
         JButton signOutButton = new JButton("Sign out");
         signOutButton.addActionListener(event -> 
@@ -88,7 +91,6 @@ public class LoginPanel extends JPanel implements Observer {
                 attemptLogIn(loginName.getText(), loginPassword.getText()));
         this.add(loginButton);
 
-        // TODO make sure to initialize this as per rick's demonstrated behavior
         // account information for logged in user
         this.statusHeader = new JLabel("Status: ", SwingConstants.RIGHT);
         this.statusData = new JLabel("Login First");
@@ -109,7 +111,8 @@ public class LoginPanel extends JPanel implements Observer {
             return false;
         }
 
-        // the user exists in the collection, does the password match?
+        // the user exists in the collection, does the password match? - clear
+        // password field as per Rick's GUI
         else if (! jukebox.getAccountCollection().getAccount(name).getPassword().equals(password)) {
 
             JOptionPane.showMessageDialog(null, "Invalid Password.");
@@ -121,20 +124,21 @@ public class LoginPanel extends JPanel implements Observer {
         else {
 
             System.out.println("[Logging in] : " + name);
+
             // set this user as the current user in the account collection
             jukebox.getAccountCollection().setCurrentUser(jukebox.getAccountCollection().getAccount(name));
 
 
-            // TODO fetch metrics and display
+            // fetch metrics and display
             int userSongsPlayedToday = jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday();
             int userSecondsLeft = jukebox.getAccountCollection().getCurrUser().getTimeLeft();
             String currentData = String.format("%02d:%02d:%02d", userSecondsLeft/3600, 
                     userSecondsLeft%3600/60, userSecondsLeft%3600%60);
             this.statusData.setText(userSongsPlayedToday + " selected, " + currentData);
+
             return true;
         }
     }
-
 
 
     private boolean attemptSignOut() {
@@ -150,7 +154,8 @@ public class LoginPanel extends JPanel implements Observer {
         // someone is signed in, sign them out
         else {
 
-            System.out.println("[Logging out] : " + jukebox.getAccountCollection().getCurrUser().getName());
+            System.out.println("[Logging out] : " + 
+                    jukebox.getAccountCollection().getCurrUser().getName());
 
             // log user out from model
             jukebox.getAccountCollection().loggedOut();
@@ -168,14 +173,12 @@ public class LoginPanel extends JPanel implements Observer {
 	@Override
     public void update(Observable o, Object arg) {
 
-        // TODO delete
-        System.out.println("LoginPanel received update message from jukebox.");
+        // System.out.println("LoginPanel received update message from jukebox.");
 
         int userSongsPlayedToday = jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday();
         int userSecondsLeft = jukebox.getAccountCollection().getCurrUser().getTimeLeft();
         String currentData = String.format("%02d:%02d:%02d", userSecondsLeft/3600, 
                 userSecondsLeft%3600/60, userSecondsLeft%3600%60);
         this.statusData.setText(userSongsPlayedToday + " selected, " + currentData);
-
     }
 }

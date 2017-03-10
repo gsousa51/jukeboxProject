@@ -35,11 +35,8 @@ public class RunJukeboxGUI_Iteration1 {
     // main method to run everything
     public static void main(String[] args) {
 
-        // TODO clean up - testing here
         // Set up model
         Jukebox jukebox = new Jukebox();
-        // Song lopingString = jukebox.getSongCollection().getSong("Loping Sting");
-        // Account user1 = jukebox.getAccountCollection().getAccount("Chris");
 
         // Set up nimbus to match Rick's GUI
         attemptToSetNimbusLookAndFeel();
@@ -75,7 +72,6 @@ public class RunJukeboxGUI_Iteration1 {
     private static void attemptToSetNimbusLookAndFeel() {
 
         try {
-
 
             for (LookAndFeelInfo lookAndFeel : UIManager.getInstalledLookAndFeels()) {
 

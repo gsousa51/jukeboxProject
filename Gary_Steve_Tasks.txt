@@ -31,3 +31,8 @@ because our current user is stored in the accountcollection
 
 
 Dots in password field instead of asterisks - is that possible?
+
+
+** For iteration 2 - steve consider refactoring requestSong[1-2] methods in the
+buttonPanel into 
+one method, passing the song in

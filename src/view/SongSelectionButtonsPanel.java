@@ -78,12 +78,15 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
 
     } // JukeboxGUI constructor
 
+
 	@Override
 	public void update(Observable o, Object arg) {
-        System.out.println("SongSelectionButtonsPanel received update message from jukebox.");
 
+        // System.out.println("SongSelectionButtonsPanel received update message from jukebox.");
     }
 
+
+    // attempt to play song1
     private boolean requestSong1() {
         
         // Force jukebox to look if date has changed
@@ -104,16 +107,17 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
             // user has already played 3 songs today - can not play any more
             if (jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday() > 2) {
                 JOptionPane.showMessageDialog(null, 
-                        this.jukebox.getAccountCollection().getCurrUser().getName() + " has reached the limit");
+                        this.jukebox.getAccountCollection().getCurrUser().getName() + 
+                        " has reached the limit");
             }
 
             // user does not have enough minutes to play the song
-            else if (this.jukebox.getAccountCollection().getCurrUser().getTimeLeft() < this.song1.getLength()) {
+            else if (this.jukebox.getAccountCollection().getCurrUser().getTimeLeft() < 
+                    this.song1.getLength()) {
 
                 JOptionPane.showMessageDialog(null, 
                         this.jukebox.getAccountCollection().getCurrUser().getName() + 
                         " does not have enough time credit for this song");
-
             }
             
             // song already played 3 times today, can not be played again today
@@ -123,11 +127,8 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
             }
 
 
-
-            // // else if (!this.jukebox.validPlay(this.song1)) {
-                // JOptionPane.showMessageDialog(null, "Song 1 max plays reached");
-            // }
-
+            // user has enough time credit and song is able to be played
+            // play song
             else if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song1) 
                     && jukebox.validPlay(this.song1)) {
 
@@ -140,6 +141,8 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
         return false;
     }
 
+
+    // attempt to play song2
     private boolean requestSong2() {
         
         // Force jukebox to look if date has changed
@@ -160,16 +163,17 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
             // user has already played 3 songs today - can not play any more
             if (jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday() > 2) {
                 JOptionPane.showMessageDialog(null, 
-                        this.jukebox.getAccountCollection().getCurrUser().getName() + " has reached the limit");
+                        this.jukebox.getAccountCollection().getCurrUser().getName() + 
+                        " has reached the limit");
             }
 
             // user does not have enough minutes to play the song
-            else if (this.jukebox.getAccountCollection().getCurrUser().getTimeLeft() < this.song2.getLength()) {
+            else if (this.jukebox.getAccountCollection().getCurrUser().getTimeLeft() < 
+                    this.song2.getLength()) {
 
                 JOptionPane.showMessageDialog(null, 
                         this.jukebox.getAccountCollection().getCurrUser().getName() + 
                         " does not have enough time credit for this song");
-
             }
             
             // song already played 3 times today, can not be played again today
@@ -178,12 +182,8 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
                         this.song2.getSongName()+ " has been played 3 times today");
             }
 
-
-
-            // else if (!this.jukebox.validPlay(this.song2)) {
-                // JOptionPane.showMessageDialog(null, "Song 1 max plays reached");
-            // }
-
+            // user has enough time credit and song is able to be played
+            // play song
             else if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song2) 
                     && jukebox.validPlay(this.song2)) {
 
@@ -194,34 +194,5 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
 
         // shouldn't ever be reached
         return false;
-//     	jukebox.checkDateChanged(LocalDate.now());
-//         if (jukebox.getAccountCollection().getCurrUser() == null) {
-//             JOptionPane.showMessageDialog(null, "User must log in before selecting a song");
-//         }
-// 
-//         // someone is logged in, attempt song play
-//         else {
-//             
-//             System.out.println("request spacemusic");
-// 
-//             if (jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday() > 2) {
-//                 JOptionPane.showMessageDialog(null, 
-//                         this.jukebox.getAccountCollection().getCurrUser().getName() + " has reached the limit");
-//             }
-// 
-//             else if (!this.jukebox.validPlay(this.song2)) {
-//                 JOptionPane.showMessageDialog(null, "Song 2 max plays reached");
-//             }
-// 
-//             else if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song2)
-//                     && jukebox.validPlay(this.song2)) {
-// 
-//                 jukebox.songChosen(this.song2);
-//                 return true;
-//             }
-//         }
-// 
-//         // shouldn't ever be reached
-//         return false;
     }
 }

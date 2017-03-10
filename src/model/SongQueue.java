@@ -1,5 +1,5 @@
 //ClassName: SongQueue 
-//Author: Gary Sousa
+//Authors: Gary Sousa & Stephen Nolan
 //Purpose: Keeps a list of songs that need to be played and plays them in FIFO order.
 package model;
 
@@ -31,24 +31,7 @@ public class SongQueue implements Observer {
 		juke=null;
 		
 	}//end constructor
-	
-	//Main method used to test the SongQueue
-	public static void main(String argv[]){
-		Jukebox juke = new Jukebox();
-		SongCollection songCollec = juke.getSongCollection();
-		SongQueue song = new SongQueue(songCollec);
-		Object[] array = songCollec.getSongList();
-		Song tada = songCollec.getSong("Tada");
-		Song spaceMusic = songCollec.getSong("Space Music");
-		juke.getAccountCollection().setCurrentUser(juke.getAccountCollection().getAccount("Chris"));
-			juke.songChosen(tada);
-			juke.songChosen(tada);
-			juke.songChosen(tada);
-			if(juke.validPlay(songCollec.getSong("Tada")))
-				juke.songChosen(tada);
-			else
-				juke.songChosen(spaceMusic);
-	}
+
 	//Parameter: Song to add to our playlist
 	public void addToQueue(Song songToAdd){
 		//If our list is empty and we aren't currently playing a song
@@ -101,13 +84,13 @@ public class SongQueue implements Observer {
 			}
 			if(!songs.isEmpty()){
 				Song temp = songs.poll();
+				//Just a safeguard in case we run into a null song.
 				if(temp!=null){
+					//Play the next song.
 					SongPlayer.playFile(new SongWaiter(), temp.getFileName());
-					System.out.println("NOW PLAYING " + temp.getSongName());
 				}
 			}
 			else songInProcess=false;
-			System.out.println("STOPPED PLAYING");
 		}
 	}
 	

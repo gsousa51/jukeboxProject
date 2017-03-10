@@ -1,5 +1,5 @@
 //ClassName: SongCollection
-//Author: Gary Sousa
+//Authors: Gary Sousa & Stephen Nolan
 //Purpose: Object keeps a list of object type Songs. Object observes the controller,
 //Jukebox, and updates the songs as necessary. Object also allows accesss to songs in
 //its list.

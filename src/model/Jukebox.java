@@ -1,5 +1,5 @@
 //ClassName: Jukebox
-//Author: Gary Sousa
+//Authors: Gary Sousa & Stephen Nolan
 //Purpose: JukeBox works as the main controller of the program.
 //It allows other objects to access objects that aren't an instance variable 
 //As well as verifying songs are valid to be played.

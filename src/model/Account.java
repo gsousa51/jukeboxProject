@@ -1,5 +1,5 @@
 //ClassName: Account
-//Author: Gary Sousa
+//Author: Gary Sousa & Stephen Nolan
 //Purpose: Account is used to track student activity with the juke box
 // It keeps track of time left that student is allowed  to play songs with
 // as well as how many songs are played by student each day.

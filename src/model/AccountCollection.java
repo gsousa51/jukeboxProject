@@ -1,5 +1,5 @@
 //ClassName: AccountCollection
-//Author: Gary Sousa
+//Authors: Gary Sousa & Stephen Nolan
 //Purpose: Keeps a list of the Accounts for the JukeBox and updates the Accounts as 
 //necessary.
 
@@ -24,6 +24,7 @@ public class AccountCollection implements Observer {
 		createAccountList();
 	}
 
+	//Hardcode the 4 accounts given in spec.
 	private void createAccountList() {
 		accountList.add(new Account("Chris", "1"));
 		accountList.add(new Account("Devon", "22"));
@@ -47,25 +48,27 @@ public class AccountCollection implements Observer {
 		return null;
 	}// end getAccount
 
+	//Used by GUI. Sets the currentUser to account given in parameter
+	//This signals that somebody has logged in.
 	public void setCurrentUser(Account user) {
 		currentUser = user;
 	}
 
+	//Returns the currently logged in user.
 	public Account getCurrUser() {
 		return currentUser;
 	}
 
+	//If user logged out, set the current user to null.
 	public void loggedOut() {
 		currentUser = null;
 	}
 
 	@Override
-	// If the message is "DayChanged"
+	// If the message isn't a Song, it's a String message saying "DayChanged"
 	// Reset the songs played for every account.
-	// Otherwise, the message is the name of the song that was played.
-	// We find the song matching the name
-	// and decrement the time left on the current user's account
-	// by the length of the song.
+	// Otherwise,the message is a Song object that was just played.
+	//Decrement current user's account by length of song.
 	public void update(Observable o, Object message) {
 		if (message instanceof String) {
 			Iterator<Account> itr = accountList.iterator();

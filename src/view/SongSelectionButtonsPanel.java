@@ -88,7 +88,7 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
         // nobody is logged in
         if (jukebox.getAccountCollection().getCurrUser() == null) {
 
-            JOptionPane.showMessageDialog(null, "Nobody is logged in.");
+            JOptionPane.showMessageDialog(null, "User must log in before selecting a song");
             return false;
         }
 
@@ -112,7 +112,7 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
     private boolean requestSong2() {
 
         if (jukebox.getAccountCollection().getCurrUser() == null) {
-            JOptionPane.showMessageDialog(null, "Nobody is logged in.");
+            JOptionPane.showMessageDialog(null, "User must log in before selecting a song");
         }
 
         // someone is logged in, attempt song play

@@ -37,6 +37,10 @@ public class LoginPanel extends JPanel implements Observer {
 
     // Instance Variables
     private Jukebox jukebox;
+    private JLabel statusHeader;
+    private JLabel statusData;
+    private JPasswordField loginPassword;
+    private JTextField loginName;
 
     // Constructor 
     public LoginPanel(Jukebox jukebox) {
@@ -50,12 +54,12 @@ public class LoginPanel extends JPanel implements Observer {
 
         // account name entry
         this.add(new JLabel("Account Name: ", SwingConstants.RIGHT));
-        JTextField loginName = new JTextField(15);
+        this.loginName = new JTextField(15);
         this.add(loginName);
 
         // password entry
         this.add(new JLabel("Password: ", SwingConstants.RIGHT));
-        JPasswordField loginPassword = new JPasswordField();
+        this.loginPassword = new JPasswordField();
         loginPassword.setEchoChar('•');
         this.add(loginPassword);
 
@@ -74,18 +78,22 @@ public class LoginPanel extends JPanel implements Observer {
 
         // TODO make sure to initialize this as per rick's demonstrated behavior
         // account information for logged in user
-        this.add(new JLabel("Status: ", SwingConstants.RIGHT));
-        this.add(new JLabel("X played, xx:xx:xx TODO"));
+        this.statusHeader = new JLabel("Status: ", SwingConstants.RIGHT);
+        this.statusData = new JLabel("Login First");
+        this.add(this.statusHeader);
+        this.add(this.statusData);
 
     } // JukeboxGUI constructor
 
 
     private boolean attemptLogIn(String name, String password) {
 
-        // does the user exist in the account collection
+        // invalid user name
         if (jukebox.getAccountCollection().getAccount(name) == null) {
             
-            JOptionPane.showMessageDialog(null, "Invalid Account.");
+            // NOTE this is the behavior Rick decided
+            this.loginName.setText("");
+            this.loginPassword.setText("");
             return false;
         }
 
@@ -93,20 +101,21 @@ public class LoginPanel extends JPanel implements Observer {
         else if (! jukebox.getAccountCollection().getAccount(name).getPassword().equals(password)) {
 
             JOptionPane.showMessageDialog(null, "Invalid Password.");
+            this.loginPassword.setText("");
             return false;
         }
         
         // password matched for valid user found in account collection
         else {
 
-            JOptionPane.showMessageDialog(null, "Welcome, " + name + ".");
-            
+            System.out.println("[Logging in] : " + name);
             // set this user as the current user in the account collection
             jukebox.getAccountCollection().setCurrentUser(jukebox.getAccountCollection().getAccount(name));
 
-            return true;
 
             // TODO fetch metrics and display
+
+            return true;
         }
 
     }
@@ -119,29 +128,35 @@ public class LoginPanel extends JPanel implements Observer {
         if (jukebox.getAccountCollection().getCurrUser() == null) {
             
             JOptionPane.showMessageDialog(null, "Nobody is signed in.");
+
+            return false;
         }
 
         // someone is signed in, sign them out
         else {
 
-            JOptionPane.showMessageDialog(null, "Signing out: " + jukebox.getAccountCollection().getCurrUser().getName());
-            jukebox.getAccountCollection().loggedOut();
-        }
+            System.out.println("[Logging out] : " + jukebox.getAccountCollection().getCurrUser().getName());
 
-        // TODO delete
-        return false;
+            // log user out from model
+            jukebox.getAccountCollection().loggedOut();
+
+            // reset metrics display
+            this.loginPassword.setText("");
+            this.loginName.setText("");
+            this.statusData.setText("Login First");
+
+            return true;
+        }
     }
 
 
 	@Override
-	public void update(Observable o, Object arg) {
-        
+    public void update(Observable o, Object arg) {
+
         // TODO delete
         System.out.println("LoginPanel received update message from jukebox.");
-		
-	}
+        int userSongsLeft = 3 - jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday();
+        this.statusData.setText("" + userSongsLeft);
 
-
-
-
+    }
 }

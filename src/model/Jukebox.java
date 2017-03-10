@@ -3,7 +3,7 @@
 //Purpose: JukeBox works as the main controller of the program.
 //It allows other objects to access objects that aren't an instance variable 
 //As well as verifying songs are valid to be played.
-
+//Authors: 
 package model;
 
 import java.time.LocalDate;
@@ -23,7 +23,7 @@ public class Jukebox extends Observable {
 		songs = new SongCollection();
 		accounts = new AccountCollection(this);
 		queue = new SongQueue(songs);
-		addObservers();
+
 		LocalDate date = LocalDate.now();
 		day = date.getDayOfYear();
 		year = date.getYear();
@@ -72,6 +72,7 @@ public class Jukebox extends Observable {
 	// Lets JukeBox know a song was chosen.
 	// If the Song is valid, we update all necessary objects
 	public boolean songChosen(Song tune) {
+		addObservers();
 		setChanged();
 		notifyObservers(tune);
 		return true;

@@ -14,6 +14,7 @@ public class Jukebox extends Observable {
 	private SongCollection songs;
 	private AccountCollection accounts;
 	private SongQueue queue;
+	private boolean observersAdded;
 	private int day;
 	private int year;
 
@@ -23,13 +24,14 @@ public class Jukebox extends Observable {
 		songs = new SongCollection();
 		accounts = new AccountCollection(this);
 		queue = new SongQueue(songs);
-
+		observersAdded=false;
 		LocalDate date = LocalDate.now();
 		day = date.getDayOfYear();
 		year = date.getYear();
 	}
 
 	private void addObservers() {
+		observersAdded = true;
 		addObserver(accounts);
 		addObserver(songs);
 		addObserver(queue);
@@ -45,6 +47,9 @@ public class Jukebox extends Observable {
 		// day has changed.
 		if (dayNow > day || yearNow > year) {
 			// notify observers of this change.
+			if(!observersAdded){
+				addObservers();
+			}
 			setChanged();
 			notifyObservers("DayChanged");
 			day = dayNow;
@@ -57,6 +62,9 @@ public class Jukebox extends Observable {
 	}
 
 	public void newDay(){
+		if(!observersAdded){
+			addObservers();
+		}
 		setChanged();
 		notifyObservers("DayChanged");
 	}

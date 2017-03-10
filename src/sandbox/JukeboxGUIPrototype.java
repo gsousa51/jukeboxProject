@@ -12,7 +12,7 @@ This class creates a Prototype GUI with some useful elements for interacting wit
 
 */
 
-package view;
+package sandbox;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,18 +27,15 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 // This Jukebox type extends Jframe
-public class JukeboxGUIPrototypeNimbus extends JFrame {
+public class JukeboxGUIPrototype extends JFrame {
 
 
     // main method to run everything
     public static void main(String[] args) {
 
-        attemptToSetNimbusLookAndFeel();
-        JFrame window = new JukeboxGUIPrototypeNimbus();
+        JFrame window = new JukeboxGUIPrototype();
         window.pack();
         window.setVisible(true);
 
@@ -49,7 +46,7 @@ public class JukeboxGUIPrototypeNimbus extends JFrame {
 
 
     // Constructor - GUI is built here
-    public JukeboxGUIPrototypeNimbus() {
+    public JukeboxGUIPrototype() {
 
         // place the JFrame on the screen
         this.setSize(900, 600);
@@ -140,27 +137,4 @@ public class JukeboxGUIPrototypeNimbus extends JFrame {
         songPanelMain.add(songPlayButton);
 
     } // JukeboxGUI constructor
-
-
-    // If the system has the [Nimbus] Look and Feel, turn it on
-    private static void attemptToSetNimbusLookAndFeel() {
-
-        try {
-
-            for (LookAndFeelInfo lookAndFeel : UIManager.getInstalledLookAndFeels()) {
-
-                if ("Nimbus".equals(lookAndFeel.getName())) {
-
-                    UIManager.setLookAndFeel(lookAndFeel.getClassName());
-                    break;
-                }
-            }
-        } 
-        
-        // nimbus wasn't found
-        catch (Exception e) {
-
-        }          
-
-    }
 }

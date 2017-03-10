@@ -72,7 +72,7 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
         buttonPanel.add(new JLabel(""));
 
         // Optionally set GridLayout for this 'parent' Panel - stylistic choice
-        // this.setLayout(new GridLayout(1, 2));
+        this.setLayout(new GridLayout(1, 2));
         this.add(buttonPanel);
 
     } // JukeboxGUI constructor

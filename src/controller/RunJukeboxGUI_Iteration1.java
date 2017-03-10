@@ -14,7 +14,7 @@ model Rick's provided GUI
 
 */
 
-package runner;
+package controller;
 
 import java.awt.GridLayout;
 
@@ -29,7 +29,7 @@ import view.LoginPanel;
 import view.SongSelectionButtonsPanel;
 
 // This Jukebox type extends Jframe
-public class RunJukeboxGUI {
+public class RunJukeboxGUI_Iteration1 {
 
 
     // main method to run everything

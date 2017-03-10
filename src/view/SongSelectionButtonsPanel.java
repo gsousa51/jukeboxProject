@@ -97,7 +97,16 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
             
             System.out.println("request tada");
 
-            if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song1) 
+            if (jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday() > 2) {
+                JOptionPane.showMessageDialog(null, 
+                        this.jukebox.getAccountCollection().getCurrUser().getName() + " has reached the limit");
+            }
+            
+            else if (!this.jukebox.validPlay(this.song1)) {
+                JOptionPane.showMessageDialog(null, "Song 1 max plays reached");
+            }
+
+            else if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song1) 
                     && jukebox.validPlay(this.song1)) {
 
                 jukebox.songChosen(this.song1);
@@ -120,7 +129,16 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
             
             System.out.println("request spacemusic");
 
-            if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song2)
+            if (jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday() > 2) {
+                JOptionPane.showMessageDialog(null, 
+                        this.jukebox.getAccountCollection().getCurrUser().getName() + " has reached the limit");
+            }
+
+            else if (!this.jukebox.validPlay(this.song2)) {
+                JOptionPane.showMessageDialog(null, "Song 2 max plays reached");
+            }
+
+            else if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song2)
                     && jukebox.validPlay(this.song2)) {
 
                 jukebox.songChosen(this.song2);

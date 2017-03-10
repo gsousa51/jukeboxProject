@@ -19,6 +19,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -29,6 +31,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import model.Jukebox;
 
@@ -60,6 +63,15 @@ public class LoginPanel extends JPanel implements Observer {
         // password entry
         this.add(new JLabel("Password: ", SwingConstants.RIGHT));
         this.loginPassword = new JPasswordField();
+        loginPassword.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent event) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        loginPassword.selectAll();
+                    }
+                });
+            }
+        });
         loginPassword.setEchoChar('•');
         this.add(loginPassword);
 
@@ -71,7 +83,7 @@ public class LoginPanel extends JPanel implements Observer {
         this.add(signOutButton);
 
         // login
-        JButton loginButton = new JButton("Attempt login");
+        JButton loginButton = new JButton("Login");
         loginButton.addActionListener(event -> 
                 attemptLogIn(loginName.getText(), loginPassword.getText()));
         this.add(loginButton);

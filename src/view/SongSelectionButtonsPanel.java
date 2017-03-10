@@ -100,14 +100,11 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
         // someone is logged in, attempt song play
         else {
             
-            // TODO need to talk to gary about playing songs - 
-            // currently jukebox does not expose its songqueue... in the test
-            // code we has just made a song queue by itsef - rectify this
-
-
-
             System.out.println("request tada");
-            jukebox.songChosen(this.song1);
+
+            if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song1)) {
+                jukebox.songChosen(this.song1);
+            }
             // this.jukebox.songChosen(jukebox.getSongCollection().getSong("Tada"));
             // jukebox.
         }
@@ -125,14 +122,12 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
         // someone is logged in, attempt song play
         else {
             
-            // TODO need to talk to gary about playing songs - 
-            // currently jukebox does not expose its songqueue... in the test
-            // code we has just made a song queue by itsef - rectify this
-
-
 
             System.out.println("request spacemusic");
-            jukebox.songChosen(this.song2);
+
+            if (jukebox.getAccountCollection().getCurrUser().canPlay(this.song2)) {
+                jukebox.songChosen(this.song2);
+            }
             // this.jukebox.songChosen(jukebox.getSongCollection().getSong("Tada"));
             // jukebox.
         }

@@ -17,6 +17,7 @@ Jukebox
 package view;
 
 import java.awt.GridLayout;
+import java.time.LocalDate;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -84,7 +85,7 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
     }
 
     private boolean requestSong1() {
-
+    	jukebox.checkDateChanged(LocalDate.now());
         // nobody is logged in
         if (jukebox.getAccountCollection().getCurrUser() == null) {
 
@@ -119,7 +120,7 @@ public class SongSelectionButtonsPanel extends JPanel implements Observer {
     }
 
     private boolean requestSong2() {
-
+    	jukebox.checkDateChanged(LocalDate.now());
         if (jukebox.getAccountCollection().getCurrUser() == null) {
             JOptionPane.showMessageDialog(null, "User must log in before selecting a song");
         }

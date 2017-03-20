@@ -30,7 +30,12 @@ public class SongCollection implements Observer{
 		songList.add(new Song("FreePlay Music", "Determined Tumbao",src+"DeterminedTumbao.mp3",20));
 		songList.add(new Song("Sun Microsystems", "Flute", src+"flute.aif",6));
 		songList.add(new Song("Kevin Macleod", "Loping Sting", src+"LopingSting.mp3",5));
+<<<<<<< HEAD
 		songList.add(new Song("Unknown", "Space Music", src + "spacemusic.au",6));
+=======
+		songList.add(new Song("Unknown", "Space Music", src + "spacemusic.au", 6));
+		// songList.add(new Song("Unknown", "Space Music", src + "spacemusic.au",1500*60));
+>>>>>>> 0d1c63697eb07b9289b7a7a5caf8c3ee0ece963c
 		songList.add(new Song("FreePlay Music", "Swing Cheese", src+"SwingCheese.mp3",15));
 		songList.add(new Song("Kevin Macleod", "The Curtain Rises", src+"TheCurtainRises.mp3",28));
 		songList.add(new Song("Pierre Langer", "Untameable Fire", src+"UntameableFire.mp3",282));

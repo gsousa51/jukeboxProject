@@ -9,11 +9,14 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.ListModel;
+import javax.swing.event.ListDataListener;
+
 import songplayer.EndOfSongEvent;
 import songplayer.EndOfSongListener;
 import songplayer.SongPlayer;
 
-public class SongQueue implements Observer {
+public class SongQueue implements Observer, ListModel<Song> {
 
 	SongCollection songCollection;
 	private static Jukebox juke;
@@ -55,6 +58,28 @@ public class SongQueue implements Observer {
 		songInProcess=true;
 		
 	}
+	
+	@Override
+	public void addListDataListener(ListDataListener arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Song getElementAt(int index) {
+		return songs.get(index);
+	}
+
+	@Override
+	public int getSize() {
+		return songs.size();
+	}
+
+	@Override
+	public void removeListDataListener(ListDataListener l) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	//Method is called by Jukebox
 	//Two cases:
@@ -89,6 +114,7 @@ public class SongQueue implements Observer {
 			else songInProcess=false;
 		}
 	}
+
 	
 	
 

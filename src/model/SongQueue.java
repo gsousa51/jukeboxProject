@@ -4,12 +4,11 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Queue;
 
-import songPlayerDemo.PlayASongWithEachButtonClick.SongWaiter;
 import songplayer.EndOfSongEvent;
 import songplayer.EndOfSongListener;
 import songplayer.SongPlayer;
@@ -18,14 +17,14 @@ public class SongQueue implements Observer {
 
 	SongCollection songCollection;
 	private static Jukebox juke;
-	private static Queue<Song> songs;
+	private static List<Song> songs;
 	private static boolean songInProcess;
 	
 	
 	public SongQueue(SongCollection songCollection) {
 		this.songCollection = songCollection;
 		//Create a new ArrayDeque to hold the songs in the playlist
-		songs = new ArrayDeque<Song>();
+		songs = new ArrayList<Song>();
 		//Boolean variable to track if SongPlayer is currently playing a song.
 		songInProcess=false;
 		juke=null;
@@ -51,7 +50,7 @@ public class SongQueue implements Observer {
 		//Add song to list
 		songs.add(songToAdd);
 		//Begin song player and pop the first song in our list.
-		SongPlayer.playFile(new SongWaiter(), songs.poll().getFileName());
+		SongPlayer.playFile(new SongWaiter(), songs.get(0).getFileName());
 		//Set our flag variable to true.
 		songInProcess=true;
 		
@@ -82,13 +81,10 @@ public class SongQueue implements Observer {
 			if(juke!=null){
 				juke.checkDateChanged(LocalDate.now());
 			}
+			songs.remove(0);
 			if(!songs.isEmpty()){
-				Song temp = songs.poll();
-				//Just a safeguard in case we run into a null song.
-				if(temp!=null){
 					//Play the next song.
-					SongPlayer.playFile(new SongWaiter(), temp.getFileName());
-				}
+					SongPlayer.playFile(new SongWaiter(), songs.get(0).getFileName());
 			}
 			else songInProcess=false;
 		}

@@ -27,8 +27,9 @@ public class SongQueue implements Observer, ListModel<String> {
 	private static List<String> playList;
 	private static boolean songInProcess;
 	private static JList<String> view;
-	
+	private boolean deletedBlanks;
 	public SongQueue(SongCollection songCollection) {
+		deletedBlanks  = false;
 		this.songCollection = songCollection;
 		//Create a new ArrayDeque to hold the songs in the playlist
 		songs = new ArrayList<Song>();
@@ -36,7 +37,9 @@ public class SongQueue implements Observer, ListModel<String> {
 		songInProcess=false;
 		juke=null;
 		playList = new ArrayList<String>();
-		playList.add(" ");
+		for(int i = 0; i< 10; i++){
+			playList.add(" ");
+		}
 		
 	}//end constructor
 
@@ -52,8 +55,11 @@ public class SongQueue implements Observer, ListModel<String> {
 		else {
 			songs.add(songToAdd);
 		}
-		if(playList.size()==1 &&playList.get(0).equals(" ")){
-			playList.remove(0);
+		if(!deletedBlanks){
+			for(int i = 0; i< 10; i++){
+				playList.remove(0);
+			}
+			deletedBlanks=true;
 		}
 		playList.add(songToAdd.getSongName());
 		view.repaint();

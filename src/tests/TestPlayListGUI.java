@@ -70,11 +70,12 @@ public class TestPlayListGUI extends JFrame {
 //		}
 		displayList = new JList<String>(model);
 		
-		this.add(displayList, BorderLayout.CENTER);
+
 		model.setView(displayList);
 //		fuckThisNoise();
 		displayList.setVisibleRowCount(10);
-		displayList.setVisible(true);
+		this.add(displayList, BorderLayout.CENTER);
+
 		
 	}
 

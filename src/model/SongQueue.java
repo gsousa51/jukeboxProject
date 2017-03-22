@@ -9,20 +9,24 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JList;
 import javax.swing.ListModel;
 import javax.swing.event.ListDataListener;
 
 import songplayer.EndOfSongEvent;
 import songplayer.EndOfSongListener;
 import songplayer.SongPlayer;
+import tests.TestPlayListGUI;
 
-public class SongQueue implements Observer, ListModel<Song> {
+public class SongQueue implements Observer, ListModel<String> {
 
 	SongCollection songCollection;
 	private static Jukebox juke;
 	private static List<Song> songs;
+	//This will be used to hold the names of the songs in the playlist.
+	private static List<String> playList;
 	private static boolean songInProcess;
-	
+	private static JList<String> view;
 	
 	public SongQueue(SongCollection songCollection) {
 		this.songCollection = songCollection;
@@ -31,19 +35,32 @@ public class SongQueue implements Observer, ListModel<Song> {
 		//Boolean variable to track if SongPlayer is currently playing a song.
 		songInProcess=false;
 		juke=null;
+		playList = new ArrayList<String>();
+		playList.add(" ");
 		
 	}//end constructor
 
 	//Parameter: Song to add to our playlist
 	public void addToQueue(Song songToAdd){
 		//If our list is empty and we aren't currently playing a song
-		if(songs.isEmpty()&&!songInProcess){
+		if(!songInProcess){
 			//Send the song to the startPlaying method
 			startPlaying(songToAdd);
 		}
 		//Otherwise we're currently playing a song, just add the song
 		//To the end of our playlist.
-		else  songs.add(songToAdd);
+		else {
+			songs.add(songToAdd);
+		}
+		if(playList.size()==1 &&playList.get(0).equals(" ")){
+			playList.remove(0);
+		}
+		playList.add(songToAdd.getSongName());
+		view.repaint();
+	}
+	@Override
+	public String toString(){
+		return playList.toString();
 	}
 	
 	//Parameter: Song to begin playing
@@ -52,6 +69,7 @@ public class SongQueue implements Observer, ListModel<Song> {
 	private void startPlaying(Song songToAdd) {
 		//Add song to list
 		songs.add(songToAdd);
+		view.repaint();
 		//Begin song player and pop the first song in our list.
 		SongPlayer.playFile(new SongWaiter(), songs.get(0).getFileName());
 		//Set our flag variable to true.
@@ -59,6 +77,9 @@ public class SongQueue implements Observer, ListModel<Song> {
 		
 	}
 	
+	public void setView(JList<String> displayList){
+		SongQueue.view = displayList;
+	}
 	@Override
 	public void addListDataListener(ListDataListener arg0) {
 		// TODO Auto-generated method stub
@@ -66,13 +87,13 @@ public class SongQueue implements Observer, ListModel<Song> {
 	}
 
 	@Override
-	public Song getElementAt(int index) {
-		return songs.get(index);
+	public String getElementAt(int index) {
+		return  playList.get(index);
 	}
 
 	@Override
 	public int getSize() {
-		return songs.size();
+		return playList.size();
 	}
 
 	@Override
@@ -107,11 +128,16 @@ public class SongQueue implements Observer, ListModel<Song> {
 				juke.checkDateChanged(LocalDate.now());
 			}
 			songs.remove(0);
-			if(!songs.isEmpty()){
+			playList.remove(0);
+			view.repaint();
+			if(songs.size()>0){
 					//Play the next song.
 					SongPlayer.playFile(new SongWaiter(), songs.get(0).getFileName());
 			}
-			else songInProcess=false;
+			else{
+				songInProcess=false;
+			}
+			System.out.println(playList.toString());
 		}
 	}
 

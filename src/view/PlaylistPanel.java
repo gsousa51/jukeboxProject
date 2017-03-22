@@ -1,8 +1,12 @@
 
 package view;
 
+import java.awt.Dimension;
+
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import model.SongQueue;
 /*
@@ -24,10 +28,16 @@ public class PlaylistPanel extends JPanel {
 		//This is used for updating the JList
 		queue.setView(playlist);
 		//Initialize size of rows.
-		playlist.setVisibleRowCount(10);
+		playlist.setVisibleRowCount(5);
 		playlist.setFixedCellWidth(20);
 		playlist.setFixedCellHeight(20);
-		this.setLayout(null);
-		this.add(playlist);
+		playlist.setPreferredSize(null);
+		JScrollPane scroll = new JScrollPane(playlist);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		this.setPreferredSize(new Dimension(210,110));
+		scroll.setPreferredSize(new Dimension(200,100));
+		this.add(scroll);
+		
+		
 	}
 }

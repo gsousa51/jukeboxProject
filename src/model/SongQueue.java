@@ -16,7 +16,6 @@ import javax.swing.event.ListDataListener;
 import songplayer.EndOfSongEvent;
 import songplayer.EndOfSongListener;
 import songplayer.SongPlayer;
-import tests.TestPlayListGUI;
 
 public class SongQueue implements Observer, ListModel<String> {
 

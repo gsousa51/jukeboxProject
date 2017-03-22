@@ -22,14 +22,15 @@ public class SongQueue implements Observer, ListModel<String> {
 
 	SongCollection songCollection;
 	private static Jukebox juke;
+	//This will hold the actual playlist of Songs
 	private static List<Song> songs;
 	//This will be used to hold the names of the songs in the playlist.
 	private static List<String> playList;
 	private static boolean songInProcess;
 	private static JList<String> view;
-	private boolean deletedBlanks;
+
 	public SongQueue(SongCollection songCollection) {
-		deletedBlanks  = false;
+
 		this.songCollection = songCollection;
 		//Create a new ArrayDeque to hold the songs in the playlist
 		songs = new ArrayList<Song>();
@@ -37,9 +38,7 @@ public class SongQueue implements Observer, ListModel<String> {
 		songInProcess=false;
 		juke=null;
 		playList = new ArrayList<String>();
-		for(int i = 0; i< 10; i++){
-			playList.add(" ");
-		}
+
 		
 	}//end constructor
 
@@ -55,15 +54,11 @@ public class SongQueue implements Observer, ListModel<String> {
 		else {
 			songs.add(songToAdd);
 		}
-		if(!deletedBlanks){
-			for(int i = 0; i< 10; i++){
-				playList.remove(0);
-			}
-			deletedBlanks=true;
-		}
+		//Add the name of the song to our String list of songs
 		playList.add(songToAdd.getSongName());
 		view.repaint();
 	}
+	//This is used for testing purposes.
 	@Override
 	public String toString(){
 		return playList.toString();
@@ -83,6 +78,8 @@ public class SongQueue implements Observer, ListModel<String> {
 		
 	}
 	
+	//Purpose: Lets the SongQueue object have access to its JList
+	//This allows us to update it when a song ends.
 	public void setView(JList<String> displayList){
 		SongQueue.view = displayList;
 	}
@@ -133,8 +130,10 @@ public class SongQueue implements Observer, ListModel<String> {
 			if(juke!=null){
 				juke.checkDateChanged(LocalDate.now());
 			}
+			//Remove the top of each of our lists
 			songs.remove(0);
 			playList.remove(0);
+			//update the JList
 			view.repaint();
 			if(songs.size()>0){
 					//Play the next song.
@@ -146,8 +145,4 @@ public class SongQueue implements Observer, ListModel<String> {
 			System.out.println(playList.toString());
 		}
 	}
-
-	
-	
-
 }

@@ -68,6 +68,10 @@ public class Jukebox extends Observable {
 		setChanged();
 		notifyObservers("DayChanged");
 	}
+	
+	public SongQueue getSongQueue(){
+		return queue;
+	}
 	public SongCollection getSongCollection() {
 		return songs;
 	}

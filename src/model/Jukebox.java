@@ -6,10 +6,11 @@
 //Authors: 
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Observable;
 
-public class Jukebox extends Observable {
+public class Jukebox extends Observable implements Serializable {
 
 	private SongCollection songs;
 	private AccountCollection accounts;

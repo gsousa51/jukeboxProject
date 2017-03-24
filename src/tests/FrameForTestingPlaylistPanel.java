@@ -5,12 +5,23 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import model.AccountCollection;
 import model.Jukebox;
+import model.SongQueue;
 import view.PlaylistPanel;
 
 public class FrameForTestingPlaylistPanel extends JFrame {
@@ -19,17 +30,61 @@ public class FrameForTestingPlaylistPanel extends JFrame {
 
 	public static void main(String[] args) {
 		FrameForTestingPlaylistPanel window = new FrameForTestingPlaylistPanel();
+		System.out.println("Got here...?");
 		window.setVisible(true);
 	}
 
 
 	private JButton addSong1 = new JButton("AddSong1");
 	private JButton addSong2 = new JButton("AddSong2");
-	private Jukebox juke = new Jukebox();
+	private Jukebox juke;
+	private SongQueue queue;
+	private AccountCollection accounts;
 
 	public FrameForTestingPlaylistPanel() {
+		promptUser();
 		layoutGUI();
 		registerListeners();
+	}
+
+	private void promptUser() {
+		int userInput = JOptionPane.showConfirmDialog(null, "Use default list?");
+		if (userInput == JOptionPane.YES_OPTION){
+			juke = new Jukebox();
+			queue = juke.getSongQueue();
+			accounts = juke.getAccountCollection();
+	}
+			
+		else{
+			FileInputStream stream= null;
+			ObjectInputStream input = null;
+			try {
+				stream = new FileInputStream("savedObjects.txt");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				input = new ObjectInputStream(stream);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				juke = (Jukebox) input.readObject();
+				queue= juke.getSongQueue();
+				accounts = juke.getAccountCollection();
+				System.out.println("We read in the objects successfully...");
+				System.out.println(juke.getSongCollection().getSong("Tada").getTimesPlayedToday());
+				System.out.println(accounts.getAccount("River").getSongsPlayedToday());
+				System.out.println("Songs played: " + queue.toString());
+				input.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void layoutGUI() {
@@ -48,16 +103,51 @@ public class FrameForTestingPlaylistPanel extends JFrame {
 		this.add(buttonPane, BorderLayout.NORTH);
 
 		//Our playlist panel 
-		PlaylistPanel playlist = new PlaylistPanel(juke.getSongQueue());
+		PlaylistPanel playlist = new PlaylistPanel(queue);
 		//add it to the center
 		this.add(playlist, BorderLayout.CENTER);
 		playlist.setSize(new Dimension(300,300));
 	}
 
+	// The controller that askes the user to save a persistent object or not
+	private class ListenForWindowClose extends WindowAdapter {
+
+		@Override
+		public void windowClosing(WindowEvent e) {
+			
+			int userInput = JOptionPane.showConfirmDialog(null, "Save this playlist");
+			if (userInput == JOptionPane.YES_OPTION){
+					FileOutputStream stream = null;
+					ObjectOutputStream output = null;
+					try {
+						stream = new FileOutputStream("savedObjects.txt");
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					try {
+						output = new ObjectOutputStream(stream);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					try {
+						queue.userClosedWindow();
+						output.writeObject(juke);
+//						output.writeObject(queue);
+//						output.writeObject(accounts);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			}
+	}
+	}
 
 	private void registerListeners() {
 		addSong1.addActionListener(new Song1Listener());
 		addSong2.addActionListener(new Song2Listener());
+		this.addWindowListener(new ListenForWindowClose());
 	}
 
 	/*Both of the listeners only access the jukebox. 

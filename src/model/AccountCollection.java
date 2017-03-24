@@ -5,13 +5,14 @@
 
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class AccountCollection implements Observer {
+public class AccountCollection implements Observer, Serializable {
 
 	List<Account> accountList;
 	Jukebox juke;

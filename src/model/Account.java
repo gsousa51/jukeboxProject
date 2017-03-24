@@ -6,7 +6,9 @@
 
 package model;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
 	//how many minutes student is allowed to listen to music
 	private static int TIME_ALLOWED = 1500;
 	private int timeLeft;

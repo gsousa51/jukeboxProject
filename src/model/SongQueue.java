@@ -3,6 +3,7 @@
 //Purpose: Keeps a list of songs that need to be played and plays them in FIFO order.
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +18,21 @@ import songplayer.EndOfSongEvent;
 import songplayer.EndOfSongListener;
 import songplayer.SongPlayer;
 
-public class SongQueue implements Observer, ListModel<String> {
+public class SongQueue implements Observer, ListModel<String>, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	SongCollection songCollection;
-	private static Jukebox juke;
+	private Jukebox juke;
 	//This will hold the actual playlist of Songs
-	private static List<Song> songs;
+	private  List<Song> songs;
 	//This will be used to hold the names of the songs in the playlist.
-	private static List<String> playList;
-	private static boolean songInProcess;
-	private static JList<String> view;
+	private  List<String> playList;
+	private  boolean songInProcess;
+	private  JList<String> view;
+
 
 	public SongQueue(SongCollection songCollection) {
 
@@ -63,6 +69,9 @@ public class SongQueue implements Observer, ListModel<String> {
 		return playList.toString();
 	}
 	
+	public int amountOfSongs(){
+		return songs.size();
+	}
 	//Parameter: Song to begin playing
 	//Purpose: Method starts our SongPlayer, beginning with the song
 	//         given as parameter
@@ -80,7 +89,7 @@ public class SongQueue implements Observer, ListModel<String> {
 	//Purpose: Lets the SongQueue object have access to its JList
 	//This allows us to update it when a song ends.
 	public void setView(JList<String> displayList){
-		SongQueue.view = displayList;
+		view = displayList;
 	}
 	@Override
 	public void addListDataListener(ListDataListener arg0) {
@@ -122,7 +131,10 @@ public class SongQueue implements Observer, ListModel<String> {
 				 this.addToQueue(songToAdd);
 		}//end if
 	}
-	 public static class SongWaiter implements EndOfSongListener {
+	public void userClosedWindow(){
+		songInProcess = false;
+	}
+	 public  class SongWaiter implements EndOfSongListener {
 
 		public void songFinishedPlaying(EndOfSongEvent eosEvent) {
 			//After song is over, check if the date has changed.

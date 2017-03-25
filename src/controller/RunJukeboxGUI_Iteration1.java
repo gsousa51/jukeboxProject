@@ -22,19 +22,18 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import model.Account;
 import model.Jukebox;
-import model.Song;
 import view.LoginPanel;
 import view.SongSelectionButtonsPanel;
 
 // This Jukebox type extends Jframe
 public class RunJukeboxGUI_Iteration1 {
 
-
+	
     // main method to run everything
     public static void main(String[] args) {
 
+    	
         // Set up model
         Jukebox jukebox = new Jukebox();
 
@@ -67,6 +66,7 @@ public class RunJukeboxGUI_Iteration1 {
 
     } // method main
 
+    
 
     // If the system has the [Nimbus] Look and Feel, turn it on
     private static void attemptToSetNimbusLookAndFeel() {

@@ -49,18 +49,16 @@ public class SongQueue implements Observer, ListModel<String>, Serializable {
 
 	//Parameter: Song to add to our playlist
 	public void addToQueue(Song songToAdd){
-		//If our list is empty and we aren't currently playing a song
-		if(!songInProcess){
-			//Send the song to the startPlaying method
-			startPlaying(songToAdd);
-		}
-		//Otherwise we're currently playing a song, just add the song
-		//To the end of our playlist.
-		else {
-			songs.add(songToAdd);
-		}
+		songs.add(songToAdd);
 		//Add the name of the song to our String list of songs
 		playList.add(songToAdd.getSongName());
+		//If our list is empty and we aren't currently playing a song
+		if(!songInProcess){
+			//Begin song player and pop the first song in our list.
+			SongPlayer.playFile(new SongWaiter(), songs.get(0).getFileName());
+			//Set our flag variable to true.
+			songInProcess=true;
+		}
 		view.repaint();
 	}
 	//This is used for testing purposes.
@@ -72,19 +70,7 @@ public class SongQueue implements Observer, ListModel<String>, Serializable {
 	public int amountOfSongs(){
 		return songs.size();
 	}
-	//Parameter: Song to begin playing
-	//Purpose: Method starts our SongPlayer, beginning with the song
-	//         given as parameter
-	private void startPlaying(Song songToAdd) {
-		//Add song to list
-		songs.add(songToAdd);
-		view.repaint();
-		//Begin song player and pop the first song in our list.
-		SongPlayer.playFile(new SongWaiter(), songs.get(0).getFileName());
-		//Set our flag variable to true.
-		songInProcess=true;
-		
-	}
+
 	
 	//Purpose: Lets the SongQueue object have access to its JList
 	//This allows us to update it when a song ends.
@@ -133,6 +119,12 @@ public class SongQueue implements Observer, ListModel<String>, Serializable {
 	}
 	public void userClosedWindow(){
 		songInProcess = false;
+	}
+	public void userRestartedSavedJukebox(){
+		if(!songs.isEmpty()){
+			SongPlayer.playFile(new SongWaiter(), songs.get(0).getFileName());
+			songInProcess = true;
+		}
 	}
 	 public  class SongWaiter implements EndOfSongListener {
 

@@ -72,12 +72,14 @@ public class FrameForTestingPlaylistPanel extends JFrame {
 			
 			try {
 				juke = (Jukebox) input.readObject();
-				queue= juke.getSongQueue();
-				accounts = juke.getAccountCollection();
-				System.out.println("We read in the objects successfully...");
-				System.out.println(juke.getSongCollection().getSong("Tada").getTimesPlayedToday());
-				System.out.println(accounts.getAccount("River").getSongsPlayedToday());
-				System.out.println("Songs played: " + queue.toString());
+				juke.getSongQueue().userRestartedSavedJukebox();
+//				queue= juke.getSongQueue();
+//				accounts = juke.getAccountCollection();
+//				System.out.println("We read in the objects successfully...");
+//				System.out.println(juke.getSongCollection().getSong("Tada").getTimesPlayedToday());
+//				System.out.println(accounts.getAccount("River").getSongsPlayedToday());
+//				System.out.println("Songs played: " + queue.toString());
+				
 				input.close();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
@@ -103,7 +105,7 @@ public class FrameForTestingPlaylistPanel extends JFrame {
 		this.add(buttonPane, BorderLayout.NORTH);
 
 		//Our playlist panel 
-		PlaylistPanel playlist = new PlaylistPanel(queue);
+		PlaylistPanel playlist = new PlaylistPanel(juke.getSongQueue());
 		//add it to the center
 		this.add(playlist, BorderLayout.CENTER);
 		playlist.setSize(new Dimension(300,300));

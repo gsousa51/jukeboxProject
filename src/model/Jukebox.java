@@ -59,6 +59,7 @@ public class Jukebox extends Observable implements Serializable {
 	}
 	
 	public boolean validPlay(Song tune){
+		checkDateChanged(LocalDate.now());
 		return tune.canBePlayed()&& accounts.getCurrUser().canPlay(tune);
 	}
 

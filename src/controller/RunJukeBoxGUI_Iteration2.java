@@ -15,7 +15,9 @@ Gary is just fucking around with Iteration1's GUI
 
 package controller;
 
-import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileInputStream;
@@ -26,7 +28,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -55,28 +59,50 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
         // Set up nimbus to match Rick's GUI
         attemptToSetNimbusLookAndFeel();
 
-        // Frame to hold panels
-        JFrame window = new JFrame();
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Note: 3x1 to match look of Rick's GUI
-        this.setLayout(new GridLayout(4, 1));
-
+        this.setLayout(null);
+        this.setPreferredSize(new Dimension(750,750));
+        this.getContentPane().setBackground(Color.cyan);
+        this.setBackground(Color.CYAN);
+//        JPanel newFrame = new JPanel();
+//        newFrame.setBackground(Color.CYAN);
+//        newFrame.setSize(new Dimension(750,750));
+//        newFrame.setBackground(Color.CYAN);
+//        this.add(newFrame);
+        
         // Add the select-songs-with-buttons panel
         SongSelectionButtonsPanel selectionArea = 
             new SongSelectionButtonsPanel(juke);
+        selectionArea.setBounds(300, 0, 200, 150);
         this.add(selectionArea);
-
+ 
+        //Add the label above our playlist
+        JLabel playListLabel = new JLabel();
+        playListLabel.setText("Current song playing is on top of list");
+        Font myFont = new Font("Arial", Font.TRUETYPE_FONT, 16);
+        playListLabel.setFont(myFont);
+        playListLabel.setSize(300,50);
+        playListLabel.setLocation(27,0);
+        this.add(playListLabel);
+        
+        //Add the playlist panel to the JFrame
+        PlaylistPanel playlist = new PlaylistPanel(juke.getSongQueue());
+        //Set its placement/size
+        playlist.setBounds(0, 35, 300, 500);
+        this.add(playlist);
+        
         // Add the login panel
         LoginPanel loginArea = new LoginPanel(juke);
+        loginArea.setBounds(0, 550, 300, 150);
         this.add(loginArea);
-        
-        PlaylistPanel playlist = new PlaylistPanel(juke.getSongQueue());
-        this.add(playlist);
+       
         // register panels as Jukebox observers
         juke.addObserver(selectionArea);
         juke.addObserver(loginArea);
         this.addWindowListener(new ListenForWindowClose());
-
+        
         // Pop the GUI
         this.pack();
         this.setLocationRelativeTo(null);
@@ -87,8 +113,7 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 		int userInput = JOptionPane.showConfirmDialog(null, "Use default list?");
 		if (userInput == JOptionPane.YES_OPTION){
 			juke = new Jukebox();
-	}
-			
+	}	
 		else{
 			FileInputStream stream= null;
 			ObjectInputStream input = null;
@@ -117,7 +142,6 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 		}
 	}
     
-
     // If the system has the [Nimbus] Look and Feel, turn it on
     private static void attemptToSetNimbusLookAndFeel() {
 

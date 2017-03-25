@@ -1,6 +1,7 @@
 
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JList;
@@ -31,12 +32,9 @@ public class PlaylistPanel extends JPanel {
 		playlist.setVisibleRowCount(5);
 		playlist.setFixedCellWidth(20);
 		playlist.setFixedCellHeight(20);
-		playlist.setPreferredSize(null);
-		JScrollPane scroll = new JScrollPane(playlist);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		this.setPreferredSize(new Dimension(210,110));
-		scroll.setPreferredSize(new Dimension(200,100));
-		this.add(scroll);
+		playlist.setPreferredSize(new Dimension(300,550));
+		this.setBackground(Color.CYAN);
+		this.add(playlist);
 		
 		
 	}

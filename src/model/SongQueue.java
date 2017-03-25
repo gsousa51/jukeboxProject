@@ -51,7 +51,7 @@ public class SongQueue implements Observer, ListModel<String>, Serializable {
 	public void addToQueue(Song songToAdd){
 		songs.add(songToAdd);
 		//Add the name of the song to our String list of songs
-		playList.add(songToAdd.getSongName());
+		playList.add(songToAdd.getSongName()+ " , " + songToAdd.getArtistName());
 		//If our list is empty and we aren't currently playing a song
 		if(!songInProcess){
 			//Begin song player and pop the first song in our list.

@@ -14,17 +14,20 @@ import java.util.Observer;
 
 public class AccountCollection implements Observer, Serializable {
 
-	List<Account> accountList;
-	Jukebox juke;
-	Account currentUser;
+	private List<Account> accountList;
+	private Account currentUser;
 
-	public AccountCollection(Jukebox juke) {
-		this.juke = juke;
+	private static AccountCollection uniqueInstance = new AccountCollection();
+	
+	private AccountCollection() {
 		accountList = new ArrayList<Account>();
 		currentUser = null;
 		createAccountList();
 	}
 
+	public static AccountCollection getInstanceOf(){
+		return uniqueInstance;
+	}
 	//Hardcode the 4 accounts given in spec.
 	private void createAccountList() {
 		accountList.add(new Account("Chris", "1"));

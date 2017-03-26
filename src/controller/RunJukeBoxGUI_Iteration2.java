@@ -41,6 +41,7 @@ import model.Jukebox;
 import model.Song;
 import view.LoginPanel;
 import view.PlaylistPanel;
+import view.SongSelectionJTablePanel;
 
 /*
  * This JFrame could totally run the program pretty damn well.
@@ -66,13 +67,19 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 
 	public RunJukeBoxGUI_Iteration2() {
 
+        // set nimbus for a nicer experience
 		attemptToSetNimbusLookAndFeel();
+
+        // ask if the user wants to start from previously saved state
 		promptUser();
+
+        // run the actual GUI
 		setUpGUI();
 	}
 
 	private void setUpGUI() {
 
+        // HOISTED to pre-GUI code
 		// Set up nimbus to match Rick's GUI
 		//attemptToSetNimbusLookAndFeel();
 
@@ -104,11 +111,11 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 		 * go Obviously, modify this JPanel all you want. You're way better at
 		 * making this stuff pretty than I am.
 		 */
-		JPanel stevesPanel = new JPanel();
-		stevesPanel.setBackground(Color.BLUE);
-		stevesPanel.setSize(300, 500);
-		stevesPanel.setLocation(400, 35);
-		this.add(stevesPanel);
+        SongSelectionJTablePanel songSelectionPanel = new SongSelectionJTablePanel(juke);
+		songSelectionPanel.setBackground(Color.BLUE);
+		songSelectionPanel.setSize(300, 500);
+		songSelectionPanel.setLocation(400, 35);
+		this.add(songSelectionPanel);
 
 		// Add the label above our playlist
 		JLabel playListLabel = new JLabel();

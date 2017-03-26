@@ -165,8 +165,8 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
     }
 
     private void promptUser() {
-        int userInput = JOptionPane.showConfirmDialog(null, "Use default playlist?");
-        if (userInput == JOptionPane.YES_OPTION) {
+        int userInput = JOptionPane.showConfirmDialog(null, "Start with previous saved state?");
+        if (userInput == JOptionPane.NO_OPTION) {
             juke = new Jukebox();
         } else {
             FileInputStream stream = null;
@@ -241,11 +241,14 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
                     .getSong((String) songSelectionPanel.getTable().getValueAt(row, 1));
 
                 // TODO delete - debug
+                //System.out.println(row);
                 //System.out.println(songSelectionPanel.getTable().getValueAt(row, 1));
 
 
                 // TODO robust error checking - for example if no row is currently 
-                // selected
+                // selected or row is outside valid range
+                // if no column is selected, the jtable will return -1
+                // when asked for selected row
 
 
                 if (!juke.validPlay(requestedSong)) {
@@ -291,7 +294,7 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
         @Override
         public void windowClosing(WindowEvent e) {
 
-            int userInput = JOptionPane.showConfirmDialog(null, "Save this playlist");
+            int userInput = JOptionPane.showConfirmDialog(null, "Save data?");
             if (userInput == JOptionPane.YES_OPTION) {
                 FileOutputStream stream = null;
                 ObjectOutputStream output = null;

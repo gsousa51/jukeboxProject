@@ -18,6 +18,7 @@ package controller;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -39,6 +40,7 @@ import javax.swing.plaf.basic.BasicArrowButton;
 
 import model.Jukebox;
 import model.Song;
+
 import view.LoginPanel;
 import view.PlaylistPanel;
 import view.SongSelectionJTablePanel;
@@ -58,6 +60,9 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 
 	private Song songChosen;
 	private Jukebox juke;
+
+    // to have access from inside of the listeners
+    private SongSelectionJTablePanel songSelectionPanel;
 
 	// main method to run everything
 	public static void main(String[] args) {
@@ -85,10 +90,10 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Note: 3x1 to match look of Rick's GUI
-		this.setLayout(null);
-		this.setPreferredSize(new Dimension(750, 750));
-		this.getContentPane().setBackground(Color.cyan);
-		this.setBackground(Color.CYAN);
+		this.setLayout(new GridLayout(3, 2));
+		//this.setPreferredSize(new Dimension(750, 750));
+		// this.getContentPane().setBackground(Color.cyan);
+		// this.setBackground(Color.CYAN);
 		// JPanel newFrame = new JPanel();
 		// newFrame.setBackground(Color.CYAN);
 		// newFrame.setSize(new Dimension(750,750));
@@ -115,10 +120,10 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 
 
         // Add JTable-based panel for selecting and requesting songs
-        SongSelectionJTablePanel songSelectionPanel = new SongSelectionJTablePanel(juke);
+        this.songSelectionPanel = new SongSelectionJTablePanel(juke);
 		// songSelectionPanel.setBackground(Color.BLUE);
-		songSelectionPanel.setSize(300, 500);
-		songSelectionPanel.setLocation(400, 35);
+		//songSelectionPanel.setSize(300, 500);
+		//songSelectionPanel.setLocation(400, 35);
 		this.add(songSelectionPanel);
 
 		// Add the label above our playlist
@@ -126,26 +131,26 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 		playListLabel.setText("Current song playing is on top of list");
 		Font myFont = new Font("Arial", Font.TRUETYPE_FONT, 16);
 		playListLabel.setFont(myFont);
-		playListLabel.setSize(300, 50);
-		playListLabel.setLocation(27, 0);
+		//playListLabel.setSize(300, 50);
+		//playListLabel.setLocation(27, 0);
 		this.add(playListLabel);
 
 		// Add the playlist panel to the JFrame
 		PlaylistPanel playlist = new PlaylistPanel(juke.getSongQueue());
 		// Set its placement/size
-		playlist.setBounds(0, 35, 300, 500);
+		//playlist.setBounds(0, 35, 300, 500);
 		this.add(playlist);
 
 		// Add the login panel
 		LoginPanel loginArea = new LoginPanel(juke);
-		loginArea.setBounds(0, 550, 300, 150);
+		//loginArea.setBounds(0, 550, 300, 150);
 		this.add(loginArea);
 
 		// Add Arrow Button for Adding the Song
 		BasicArrowButton addSongButton = new BasicArrowButton(BasicArrowButton.WEST);
 		addSongButton.addActionListener(new ButtonListener());
-		addSongButton.setSize(40, 60);
-		addSongButton.setLocation(325, 225);
+		//addSongButton.setSize(40, 60);
+		//addSongButton.setLocation(325, 225);
 		this.add(addSongButton);
 
 		// register panels as Jukebox observers
@@ -229,37 +234,40 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 				 * songChosen= highlightedTextOnJTable
 				 * 
 				 */
+
+                // TODO delete - debug
+                System.out.println(songSelectionPanel.getTable().getSelectedRow());
 				
-				if (!juke.validPlay(songChosen)) {
-					// user has already played 3 songs today - can not play any
-					// more
-					if (juke.getAccountCollection().getCurrUser().getSongsPlayedToday() > 2) {
-						JOptionPane.showMessageDialog(null,
-								juke.getAccountCollection().getCurrUser().getName() + " has reached the limit");
-					}
+				// if (!juke.validPlay(songChosen)) {
+				// 	// user has already played 3 songs today - can not play any
+				// 	// more
+				// 	if (juke.getAccountCollection().getCurrUser().getSongsPlayedToday() > 2) {
+				// 		JOptionPane.showMessageDialog(null,
+				// 				juke.getAccountCollection().getCurrUser().getName() + " has reached the limit");
+				// 	}
 
-					// user does not have enough minutes to play the song
-					else if (juke.getAccountCollection().getCurrUser().getTimeLeft() < songChosen.getLength()) {
+				// 	// user does not have enough minutes to play the song
+				// 	else if (juke.getAccountCollection().getCurrUser().getTimeLeft() < songChosen.getLength()) {
 
-						JOptionPane.showMessageDialog(null,juke.getAccountCollection().getCurrUser().getName()
-								+ " does not have enough time credit for this song");
-					}
+				// 		JOptionPane.showMessageDialog(null,juke.getAccountCollection().getCurrUser().getName()
+				// 				+ " does not have enough time credit for this song");
+				// 	}
 
-					// song already played 3 times today, can not be played
-					// again
-					// today
-					else if (!songChosen.canBePlayed()) {
-						JOptionPane.showMessageDialog(null,
-								songChosen.getSongName() + " has been played 3 times today");
-					}
-				}
+				// 	// song already played 3 times today, can not be played
+				// 	// again
+				// 	// today
+				// 	else if (!songChosen.canBePlayed()) {
+				// 		JOptionPane.showMessageDialog(null,
+				// 				songChosen.getSongName() + " has been played 3 times today");
+				// 	}
+				// }
 
-				// user has enough time credit and song is able to be played
-				// play song
-				else {
+				// // user has enough time credit and song is able to be played
+				// // play song
+				// else {
 
-					juke.songChosen(songChosen);
-				}
+				// 	juke.songChosen(songChosen);
+				// }
 			}
 		}
 

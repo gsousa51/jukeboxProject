@@ -27,7 +27,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import model.Jukebox;
 import model.Song;
@@ -57,12 +59,26 @@ public class SongSelectionJTablePanel extends JPanel {
         // build a table from the model
         this.table = new JTable();
         table.setModel(model);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         // build a JScrollPane to contain everything
         this.scrollPane = new JScrollPane(table);
+        // only allow one row to be selcted at once
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        // Rowsorter for the Table
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
+        table.setRowSorter(sorter);
+
 
         // finally add the scrollpane to this panel
         this.add(scrollPane);
+	} // JukeboxGUI constructor
+    
+    public JTable getTable() {
+
+        return this.table;
+    }
         
 
 
@@ -99,109 +115,108 @@ public class SongSelectionJTablePanel extends JPanel {
 		//this.setLayout(new GridLayout(1, 2));
 		//this.add(buttonPanel);
 
-	} // JukeboxGUI constructor
 
 
-	// attempt to play song1
-	private boolean requestSong1() {
+	// // attempt to play song1
+	// private boolean requestSong1() {
 
-		// Force jukebox to look if date has changed
-		jukebox.checkDateChanged(LocalDate.now());
+	// 	// Force jukebox to look if date has changed
+	// 	jukebox.checkDateChanged(LocalDate.now());
 
-		// nobody is logged in
-		if (jukebox.getAccountCollection().getCurrUser() == null) {
+	// 	// nobody is logged in
+	// 	if (jukebox.getAccountCollection().getCurrUser() == null) {
 
-			JOptionPane.showMessageDialog(null, "User must log in before selecting a song");
-			return false;
-		}
+	// 		JOptionPane.showMessageDialog(null, "User must log in before selecting a song");
+	// 		return false;
+	// 	}
 
-		// someone is logged in, attempt song play
-		else {
+	// 	// someone is logged in, attempt song play
+	// 	else {
 
-			System.out.println("request tada");
-			if (!jukebox.validPlay(song1)) {
-				// user has already played 3 songs today - can not play any more
-				if (jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday() > 2) {
-					JOptionPane.showMessageDialog(null,
-							this.jukebox.getAccountCollection().getCurrUser().getName() + " has reached the limit");
-				}
+	// 		System.out.println("request tada");
+	// 		if (!jukebox.validPlay(song1)) {
+	// 			// user has already played 3 songs today - can not play any more
+	// 			if (jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday() > 2) {
+	// 				JOptionPane.showMessageDialog(null,
+	// 						this.jukebox.getAccountCollection().getCurrUser().getName() + " has reached the limit");
+	// 			}
 
-				// user does not have enough minutes to play the song
-				else if (this.jukebox.getAccountCollection().getCurrUser().getTimeLeft() < this.song1.getLength()) {
+	// 			// user does not have enough minutes to play the song
+	// 			else if (this.jukebox.getAccountCollection().getCurrUser().getTimeLeft() < this.song1.getLength()) {
 
-					JOptionPane.showMessageDialog(null, this.jukebox.getAccountCollection().getCurrUser().getName()
-							+ " does not have enough time credit for this song");
-				}
+	// 				JOptionPane.showMessageDialog(null, this.jukebox.getAccountCollection().getCurrUser().getName()
+	// 						+ " does not have enough time credit for this song");
+	// 			}
 
-				// song already played 3 times today, can not be played again
-				// today
-				else if (!this.song1.canBePlayed()) {
-					JOptionPane.showMessageDialog(null, this.song1.getSongName() + " has been played 3 times today");
-				}
-			}
+	// 			// song already played 3 times today, can not be played again
+	// 			// today
+	// 			else if (!this.song1.canBePlayed()) {
+	// 				JOptionPane.showMessageDialog(null, this.song1.getSongName() + " has been played 3 times today");
+	// 			}
+	// 		}
 
-			// user has enough time credit and song is able to be played
-			// play song
-			else {
+	// 		// user has enough time credit and song is able to be played
+	// 		// play song
+	// 		else {
 
-				jukebox.songChosen(this.song1);
-				return true;
-			}
-		}
+	// 			jukebox.songChosen(this.song1);
+	// 			return true;
+	// 		}
+	// 	}
 
-		// shouldn't ever be reached
-		return false;
-	}
+	// 	// shouldn't ever be reached
+	// 	return false;
+	// }
 
-	// attempt to play song2
-	private boolean requestSong2() {
+	// // attempt to play song2
+	// private boolean requestSong2() {
 
-		// Force jukebox to look if date has changed
-		jukebox.checkDateChanged(LocalDate.now());
+	// 	// Force jukebox to look if date has changed
+	// 	jukebox.checkDateChanged(LocalDate.now());
 
-		// nobody is logged in
-		if (jukebox.getAccountCollection().getCurrUser() == null) {
+	// 	// nobody is logged in
+	// 	if (jukebox.getAccountCollection().getCurrUser() == null) {
 
-			JOptionPane.showMessageDialog(null, "User must log in before selecting a song");
-			return false;
-		}
+	// 		JOptionPane.showMessageDialog(null, "User must log in before selecting a song");
+	// 		return false;
+	// 	}
 
-		// someone is logged in, attempt song play
-		else {
+	// 	// someone is logged in, attempt song play
+	// 	else {
 
-			System.out.println("request spacemusic");
-			if (!jukebox.validPlay(song2)) {
-				// user has already played 3 songs today - can not play any more
-				if (jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday() > 2) {
-					JOptionPane.showMessageDialog(null,
-							this.jukebox.getAccountCollection().getCurrUser().getName() + " has reached the limit");
-				}
+	// 		System.out.println("request spacemusic");
+	// 		if (!jukebox.validPlay(song2)) {
+	// 			// user has already played 3 songs today - can not play any more
+	// 			if (jukebox.getAccountCollection().getCurrUser().getSongsPlayedToday() > 2) {
+	// 				JOptionPane.showMessageDialog(null,
+	// 						this.jukebox.getAccountCollection().getCurrUser().getName() + " has reached the limit");
+	// 			}
 
-				// user does not have enough minutes to play the song
-				else if (this.jukebox.getAccountCollection().getCurrUser().getTimeLeft() < this.song2.getLength()) {
+	// 			// user does not have enough minutes to play the song
+	// 			else if (this.jukebox.getAccountCollection().getCurrUser().getTimeLeft() < this.song2.getLength()) {
 
-					JOptionPane.showMessageDialog(null, this.jukebox.getAccountCollection().getCurrUser().getName()
-							+ " does not have enough time credit for this song");
-				}
+	// 				JOptionPane.showMessageDialog(null, this.jukebox.getAccountCollection().getCurrUser().getName()
+	// 						+ " does not have enough time credit for this song");
+	// 			}
 
-				// song already played 3 times today, can not be played again
-				// today
-				else if (!this.song2.canBePlayed()) {
-					JOptionPane.showMessageDialog(null, this.song2.getSongName() + " has been played 3 times today");
-				}
-			}
-			// user has enough time credit and song is able to be played
-			// play song
+	// 			// song already played 3 times today, can not be played again
+	// 			// today
+	// 			else if (!this.song2.canBePlayed()) {
+	// 				JOptionPane.showMessageDialog(null, this.song2.getSongName() + " has been played 3 times today");
+	// 			}
+	// 		}
+	// 		// user has enough time credit and song is able to be played
+	// 		// play song
 
-			else {
+	// 		else {
 
-				jukebox.songChosen(this.song2);
-				return true;
-			}
-		}
+	// 			jukebox.songChosen(this.song2);
+	// 			return true;
+	// 		}
+	// 	}
 
-		// shouldn't ever be reached
-		return false;
-	}
+	// 	// shouldn't ever be reached
+	// 	return false;
+	// }
 }
 

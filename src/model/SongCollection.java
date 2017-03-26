@@ -93,20 +93,98 @@ public class SongCollection extends AbstractTableModel implements Observer, Seri
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
+        //return 80;
 		return songList.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 3;
+        
+        // NOTE: hard coded value TODO replace if a cleaner solution is apparent
+		return 4;
 	}
+
+    @Override
+    public String getColumnName(int columnIndex) {
+        
+        if (columnIndex == 0) {
+
+            return "Artist";
+        }
+
+        else if (columnIndex == 1) {
+
+            return "Title";
+        }
+
+        else if (columnIndex == 2) {
+
+            return "Seconds";
+        }
+
+        else if (columnIndex == 3) {
+
+            return "Plays Today";
+        }
+
+
+        else {
+            
+            return "ERROR";
+        }
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        
+        if (columnIndex == 0) {
+
+            return String.class;
+        }
+        
+        else if (columnIndex == 1) {
+
+            return String.class;
+        }
+        
+        else if (columnIndex == 2) {
+
+            return Integer.class;
+        }
+        
+        else if (columnIndex == 3) {
+
+            return Integer.class;
+        }
+
+        // never should be reached
+        return null;
+    }
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-        return "df";
-		// return null;
+
+        if (columnIndex == 0) {
+            
+            return songList.get(rowIndex).getArtistName();
+        }
+
+        else if (columnIndex == 1) {
+            
+            return songList.get(rowIndex).getSongName();
+        }
+
+        else if (columnIndex == 2) {
+            
+            return songList.get(rowIndex).getLength();
+        }
+
+        else if (columnIndex == 3) {
+            
+            return songList.get(rowIndex).getTimesPlayedToday();
+        }
+
+		return null;
 	}
 	
 	

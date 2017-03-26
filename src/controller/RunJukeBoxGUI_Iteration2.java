@@ -111,6 +111,10 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 		 * go Obviously, modify this JPanel all you want. You're way better at
 		 * making this stuff pretty than I am.
 		 */
+
+
+
+        // Add JTable-based panel for selecting and requesting songs
         SongSelectionJTablePanel songSelectionPanel = new SongSelectionJTablePanel(juke);
 		songSelectionPanel.setBackground(Color.BLUE);
 		songSelectionPanel.setSize(300, 500);

@@ -32,7 +32,7 @@ import model.SongCollection;
 import model.SongQueue;
 
 // A JPanel, for modularity
-public class SongSelectionJTablePanel extends JPanel implements Observer {
+public class SongSelectionJTablePanel extends JPanel {
 
 	// Instance variables
 	private Jukebox jukebox;
@@ -76,12 +76,6 @@ public class SongSelectionJTablePanel extends JPanel implements Observer {
 
 	} // JukeboxGUI constructor
 
-	@Override
-	public void update(Observable o, Object arg) {
-
-		// System.out.println("SongSelectionButtonsPanel received update message
-		// from jukebox.");
-	}
 
 	// attempt to play song1
 	private boolean requestSong1() {

@@ -16,10 +16,15 @@ import java.util.Observer;
 public class SongCollection implements Observer, Serializable{
 
 	private List<Song> songList; 
+	private static SongCollection uniqueInstance = new SongCollection();
 	
-	public SongCollection(){
+	private SongCollection(){
 		songList = new ArrayList<Song>();
 		buildList();
+	}
+	
+	public static SongCollection getInstanceOf(){
+		return uniqueInstance;
 	}
 	
 	private void buildList(){

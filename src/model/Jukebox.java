@@ -22,8 +22,8 @@ public class Jukebox extends Observable implements Serializable {
 	// Has AccountCollectionand SongCollection 
 	//and eventually the GUIs as Observers
 	public Jukebox() {
-		songs = new SongCollection();
-		accounts = new AccountCollection(this);
+		songs = SongCollection.getInstanceOf();
+		accounts = AccountCollection.getInstanceOf();
 		queue = new SongQueue(songs);
 		observersAdded=false;
 		LocalDate date = LocalDate.now();
@@ -59,6 +59,7 @@ public class Jukebox extends Observable implements Serializable {
 	}
 	
 	public boolean validPlay(Song tune){
+		checkDateChanged(LocalDate.now());
 		return tune.canBePlayed()&& accounts.getCurrUser().canPlay(tune);
 	}
 

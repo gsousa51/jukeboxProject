@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class SongCollection implements Observer, Serializable{
+import javax.swing.table.AbstractTableModel;
+
+public class SongCollection extends AbstractTableModel implements Observer, Serializable {
 
 	private List<Song> songList; 
 	private static SongCollection uniqueInstance = new SongCollection();
@@ -87,6 +89,25 @@ public class SongCollection implements Observer, Serializable{
 		}
 			
 	}//end update
+
+	@Override
+	public int getRowCount() {
+		// TODO Auto-generated method stub
+		return songList.size();
+	}
+
+	@Override
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		return 3;
+	}
+
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		// TODO Auto-generated method stub
+        return "df";
+		// return null;
+	}
 	
 	
 }

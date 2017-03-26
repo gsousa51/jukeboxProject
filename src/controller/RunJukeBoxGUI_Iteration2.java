@@ -65,6 +65,8 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 	} // method main
 
 	public RunJukeBoxGUI_Iteration2() {
+
+		attemptToSetNimbusLookAndFeel();
 		promptUser();
 		setUpGUI();
 	}
@@ -72,7 +74,7 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 	private void setUpGUI() {
 
 		// Set up nimbus to match Rick's GUI
-		attemptToSetNimbusLookAndFeel();
+		//attemptToSetNimbusLookAndFeel();
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Note: 3x1 to match look of Rick's GUI

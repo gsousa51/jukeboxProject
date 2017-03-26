@@ -25,6 +25,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
 
 import model.Jukebox;
 import model.Song;
@@ -36,8 +39,11 @@ public class SongSelectionJTablePanel extends JPanel {
 
 	// Instance variables
 	private Jukebox jukebox;
-	private Song song1;
-	private Song song2;
+    private TableModel model;
+    private JTable table;
+    private JScrollPane scrollPane;
+	// private Song song1;
+	// private Song song2;
 
 	// Constructor
 	public SongSelectionJTablePanel(Jukebox jukebox) {
@@ -45,34 +51,53 @@ public class SongSelectionJTablePanel extends JPanel {
 		// contain the jukebox
 		this.jukebox = jukebox;
 
+        // grab the model for the JTable
+        this.model = jukebox.getSongCollection();
+
+        // build a table from the model
+        this.table = new JTable();
+        table.setModel(model);
+
+        // build a JScrollPane to contain everything
+        this.scrollPane = new JScrollPane(table);
+
+        // finally add the scrollpane to this panel
+        this.add(scrollPane);
+        
+
+
+
+
+
+
 		// Save the songs in instance variables
-		song1 = jukebox.getSongCollection().getSong("Tada");
-		song2 = jukebox.getSongCollection().getSong("Space Music");
+		//song1 = jukebox.getSongCollection().getSong("Tada");
+		//song2 = jukebox.getSongCollection().getSong("Space Music");
 
 		// The panel containing the buttons
 		// NOTE - 3x2 layout intentional to correctly layout buttons similar
 		// to Rick's GUI
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(3, 2));
+		// JPanel buttonPanel = new JPanel();
+		//buttonPanel.setLayout(new GridLayout(3, 2));
 
 		// choose song1
-		JButton selectSong1Button = new JButton("Select song 1");
-		buttonPanel.add(selectSong1Button);
-		selectSong1Button.addActionListener(event -> requestSong1());
+		//JButton selectSong1Button = new JButton("Select song 1");
+		//buttonPanel.add(selectSong1Button);
+		//selectSong1Button.addActionListener(event -> requestSong1());
 
 		// 'spacer' to manipulate layout
-		buttonPanel.add(new JLabel(""));
+		//buttonPanel.add(new JLabel(""));
 
-		JButton selectSong2Button = new JButton("Select song 2");
-		buttonPanel.add(selectSong2Button);
-		selectSong2Button.addActionListener(event -> requestSong2());
+		//JButton selectSong2Button = new JButton("Select song 2");
+		//buttonPanel.add(selectSong2Button);
+		//selectSong2Button.addActionListener(event -> requestSong2());
 
 		// 'spacer' to manipulate layout
-		buttonPanel.add(new JLabel(""));
+		//buttonPanel.add(new JLabel(""));
 
 		// Optionally set GridLayout for this 'parent' Panel - stylistic choice
-		this.setLayout(new GridLayout(1, 2));
-		this.add(buttonPanel);
+		//this.setLayout(new GridLayout(1, 2));
+		//this.add(buttonPanel);
 
 	} // JukeboxGUI constructor
 
@@ -180,6 +205,3 @@ public class SongSelectionJTablePanel extends JPanel {
 	}
 }
 
-public class SongSelectionJTablePanel {
-
-}

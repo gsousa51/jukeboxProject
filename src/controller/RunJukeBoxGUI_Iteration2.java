@@ -15,8 +15,6 @@ Gary is just fucking around with Iteration1's GUI
 
 package controller;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -33,14 +31,12 @@ import java.io.ObjectOutputStream;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.plaf.basic.BasicArrowButton;
 
 import model.Jukebox;
 import model.Song;
-
 import view.LoginPanel;
 import view.PlaylistPanel;
 import view.SongSelectionJTablePanel;
@@ -58,7 +54,6 @@ import view.SongSelectionJTablePanel;
 // This Jukebox type extends Jframe
 public class RunJukeBoxGUI_Iteration2 extends JFrame {
 
-    private Song songChosen;
     private Jukebox juke;
 
     // to have access from inside of the listeners

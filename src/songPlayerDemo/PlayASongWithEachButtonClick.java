@@ -16,7 +16,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Queue;
 
 import javax.swing.JButton;

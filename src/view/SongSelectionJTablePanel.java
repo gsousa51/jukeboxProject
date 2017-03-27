@@ -16,14 +16,6 @@ Jukebox
 
 package view;
 
-import java.awt.GridLayout;
-import java.time.LocalDate;
-import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -32,9 +24,6 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import model.Jukebox;
-import model.Song;
-import model.SongCollection;
-import model.SongQueue;
 
 // A JPanel, for modularity
 public class SongSelectionJTablePanel extends JPanel {
@@ -71,6 +60,8 @@ public class SongSelectionJTablePanel extends JPanel {
         table.setRowSorter(sorter);
 
 
+		if (model.getColumnCount()>0)
+			table.setRowSelectionInterval(0, 0);
         // finally add the scrollpane to this panel
         this.add(scrollPane);
 	} // JukeboxGUI constructor

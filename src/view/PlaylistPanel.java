@@ -6,8 +6,6 @@ import java.awt.Dimension;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 
 import model.SongQueue;
 /*

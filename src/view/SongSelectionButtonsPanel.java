@@ -28,8 +28,6 @@ import javax.swing.JPanel;
 
 import model.Jukebox;
 import model.Song;
-import model.SongCollection;
-import model.SongQueue;
 
 // A JPanel, for modularity
 public class SongSelectionButtonsPanel extends JPanel implements Observer {

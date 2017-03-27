@@ -6,7 +6,7 @@
 Instructor: Rick Mercer
 
 Assignment: Project 5 - Jukebox
-Due: Friday 10 March 2017 @ 10:00p
+Due: Friday 27 March 2017 @ 2:00p
 
 
 This class runs the Jukebox GUI for iteration 2 - 

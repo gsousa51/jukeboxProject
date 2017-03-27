@@ -9,8 +9,6 @@ Assignment: Project 5 - Jukebox
 Due: Friday 27 March 2017 @ 2:00p
 
 
-This class runs the Jukebox GUI for iteration 2 - 
-Gary is just fucking around with Iteration1's GUI
 */
 
 package controller;

@@ -117,6 +117,16 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
          * making this stuff pretty than I am.
          */
 
+        // Add the label above our playlist
+        JLabel songSelectionAreaLabel = new JLabel();
+        // playListLabel.setText("Current song playing is on top of list");
+        songSelectionAreaLabel.setText("Song Catalog - choose here");
+        // Font myFont = new Font("Arial", Font.TRUETYPE_FONT, 16);
+        // playListLabel.setFont(myFont);
+        songSelectionAreaLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        songSelectionAreaLabel.setSize(400, 50);
+        songSelectionAreaLabel.setLocation(550, 0);
+        this.add(songSelectionAreaLabel);
 
 
         // Add JTable-based panel for selecting and requesting songs
@@ -132,10 +142,12 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 
         // Add the label above our playlist
         JLabel playListLabel = new JLabel();
-        playListLabel.setText("Current song playing is on top of list");
+        // playListLabel.setText("Current song playing is on top of list");
+        playListLabel.setText("Now Playing (current song on top)");
         // Font myFont = new Font("Arial", Font.TRUETYPE_FONT, 16);
         // playListLabel.setFont(myFont);
-        playListLabel.setSize(200, 50);
+        playListLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        playListLabel.setSize(400, 50);
         playListLabel.setLocation(27, 0);
 
         // TODO add back in once sizing issue fixed

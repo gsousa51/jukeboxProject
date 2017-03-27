@@ -15,6 +15,8 @@ Gary is just fucking around with Iteration1's GUI
 
 package controller;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -37,6 +39,7 @@ import javax.swing.plaf.basic.BasicArrowButton;
 
 import model.Jukebox;
 import model.Song;
+
 import view.LoginPanel;
 import view.PlaylistPanel;
 import view.SongSelectionJTablePanel;
@@ -85,10 +88,12 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Note: 3x1 to match look of Rick's GUI
-        this.setLayout(new GridLayout(3, 2));
-        //this.setPreferredSize(new Dimension(750, 750));
-        // this.getContentPane().setBackground(Color.cyan);
-        // this.setBackground(Color.CYAN);
+        // this.setLayout(new GridLayout(3, 2));
+        this.setLayout(null);
+        this.setPreferredSize(new Dimension(1000, 750));
+        this.setLocationRelativeTo(null);
+        //this.getContentPane().setBackground(Color.cyan);
+        //this.setBackground(Color.CYAN);
         // JPanel newFrame = new JPanel();
         // newFrame.setBackground(Color.CYAN);
         // newFrame.setSize(new Dimension(750,750));
@@ -117,35 +122,47 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
         // Add JTable-based panel for selecting and requesting songs
         this.songSelectionPanel = new SongSelectionJTablePanel(juke);
         // songSelectionPanel.setBackground(Color.BLUE);
-        //songSelectionPanel.setSize(300, 500);
-        //songSelectionPanel.setLocation(400, 35);
+        songSelectionPanel.setSize(500, 500);
+        songSelectionPanel.setLocation(400, 35);
+        
+        // TODO add back in once sizing issue fixed
+        //songSelectionPanel.setPreferredSize(new Dimension(200, 200));
+        // songSelectionPanel.setMinimumSize(new Dimension(100, 100));
         this.add(songSelectionPanel);
 
         // Add the label above our playlist
         JLabel playListLabel = new JLabel();
         playListLabel.setText("Current song playing is on top of list");
-        Font myFont = new Font("Arial", Font.TRUETYPE_FONT, 16);
-        playListLabel.setFont(myFont);
-        //playListLabel.setSize(300, 50);
-        //playListLabel.setLocation(27, 0);
+        // Font myFont = new Font("Arial", Font.TRUETYPE_FONT, 16);
+        // playListLabel.setFont(myFont);
+        playListLabel.setSize(200, 50);
+        playListLabel.setLocation(27, 0);
+
+        // TODO add back in once sizing issue fixed
         this.add(playListLabel);
 
         // Add the playlist panel to the JFrame
         PlaylistPanel playlist = new PlaylistPanel(juke.getSongQueue());
         // Set its placement/size
-        //playlist.setBounds(0, 35, 300, 500);
+        playlist.setBounds(0, 35, 300, 500);
+
+        // TODO add back in once sizing issue fixed
         this.add(playlist);
 
         // Add the login panel
         LoginPanel loginArea = new LoginPanel(juke);
-        //loginArea.setBounds(0, 550, 300, 150);
+        loginArea.setBounds(0, 550, 300, 150);
+
+        // TODO add back in once sizing issue fixed
         this.add(loginArea);
 
         // Add Arrow Button for Adding the Song
         BasicArrowButton addSongButton = new BasicArrowButton(BasicArrowButton.WEST);
         addSongButton.addActionListener(new ButtonListener());
-        //addSongButton.setSize(40, 60);
-        //addSongButton.setLocation(325, 225);
+        addSongButton.setPreferredSize(new Dimension(50, 50));
+        addSongButton.setSize(40, 60);
+        addSongButton.setLocation(325, 225);
+        // TODO add back in once sizing issue fixed
         this.add(addSongButton);
 
         // register panels as Jukebox observers
@@ -276,6 +293,8 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
 
                     // Request the song
                     juke.songChosen(requestedSong);
+                    songSelectionPanel.updateUI();
+                    songSelectionPanel.repaint();
 
                 }
             }

@@ -133,9 +133,6 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
         songSelectionPanel.setSize(500, 500);
         songSelectionPanel.setLocation(400, 35);
         
-        // TODO add back in once sizing issue fixed
-        //songSelectionPanel.setPreferredSize(new Dimension(200, 200));
-        // songSelectionPanel.setMinimumSize(new Dimension(100, 100));
         this.add(songSelectionPanel);
 
         // Add the label above our playlist
@@ -148,7 +145,6 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
         playListLabel.setSize(400, 50);
         playListLabel.setLocation(27, 0);
 
-        // TODO add back in once sizing issue fixed
         this.add(playListLabel);
 
         // Add the playlist panel to the JFrame
@@ -156,14 +152,12 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
         // Set its placement/size
         playlist.setBounds(0, 35, 300, 500);
 
-        // TODO add back in once sizing issue fixed
         this.add(playlist);
 
         // Add the login panel
         LoginPanel loginArea = new LoginPanel(juke);
         loginArea.setBounds(0, 550, 300, 150);
 
-        // TODO add back in once sizing issue fixed
         this.add(loginArea);
 
         // Add Arrow Button for Adding the Song
@@ -172,7 +166,6 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
         addSongButton.setPreferredSize(new Dimension(50, 50));
         addSongButton.setSize(40, 60);
         addSongButton.setLocation(325, 225);
-        // TODO add back in once sizing issue fixed
         this.add(addSongButton);
 
         // register panels as Jukebox observers
@@ -262,13 +255,9 @@ public class RunJukeBoxGUI_Iteration2 extends JFrame {
                 Song requestedSong = (Song) juke.getSongCollection()
                     .getSong((String) songSelectionPanel.getTable().getValueAt(row, 1));
 
-                // TODO delete - debug
-                //System.out.println(row);
-                //System.out.println(songSelectionPanel.getTable().getValueAt(row, 1));
 
-
-                // TODO robust error checking - for example if no row is currently 
-                // selected or row is outside valid range
+                // TODO - optional robust error checking - for example if no row
+                // is currently selected or row is outside valid range
                 // if no column is selected, the jtable will return -1
                 // when asked for selected row
 

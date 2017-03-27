@@ -16,6 +16,8 @@ Jukebox
 
 package view;
 
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -64,6 +66,8 @@ public class SongSelectionJTablePanel extends JPanel {
 			table.setRowSelectionInterval(0, 0);
         // finally add the scrollpane to this panel
         this.add(scrollPane);
+
+		//this.setPreferredSize(new Dimension(300,550));
 	} // JukeboxGUI constructor
     
     public JTable getTable() {

@@ -31,7 +31,7 @@ public class PlaylistPanel extends JPanel {
 		playlist.setFixedCellWidth(20);
 		playlist.setFixedCellHeight(20);
 		playlist.setPreferredSize(new Dimension(300,550));
-		this.setBackground(Color.CYAN);
+		//this.setBackground(Color.CYAN);
 		this.add(playlist);
 		
 		
